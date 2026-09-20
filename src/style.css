@@ -1,3 +1,162 @@
 body {
-    background-color: rgb(184, 59, 59);
+    background-color: rgb(223, 201, 201);
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    background-color: rgb(226, 212, 212);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    font-size: 1.25rem;
+    letter-spacing: 1.6px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+}
+
+.display {
+    height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    padding-left: 250px;
+    padding-top: 60px;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    padding-right: 400px;
+}
+
+.display h1 {
+    letter-spacing: 2px;
+}
+
+.nav-item {
+    background-color: rgba(255, 255, 255, 0);
+    width: 100%;
+    padding: 7px;
+    border-radius: 10px;
+}
+
+.xtra-bottom {
+    margin-bottom: 12px;
+}
+
+.nav-item:hover {
+    background-color: rgba(0, 0, 0, 0.164)
+}
+
+.id {
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+    padding: -10px;
+    margin-top: -20px;
+    width: 119%;
+    margin-left: -20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.id p {
+    margin-left: 25px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+nav img {
+    height: 50px;
+    width: 50px;
+    margin: 0;
+    padding: 0;
+    margin-left: 20px;
+}
+
+.project-item {
+    font-weight: normal !important;
+    font-size: 1.1rem;
+    margin-left: 10px;
+}
+
+.project-item::before {
+    content: "";
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.8rem;
+    vertical-align: middle;
+    background-image: url(./images/hashtag-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.inbox::before {
+    content: "";
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.8rem;
+    vertical-align: middle;
+    background-image: url(./images/inbox-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.today::before {
+    content: "";
+    display: inline-block;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-right: 0.8rem;
+    vertical-align: middle;
+    background-image: url(./images/calendar-circle-exclamation-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.todos {
+    margin-top: -10px;
+
+}
+
+.todo-item {
+    border-bottom: 0.1px solid rgba(128, 128, 128, 0.377);
+}
+
+.todos .title {
+    font-size: 1.1rem;
+}
+
+.todos .due {
+    font-size: 0.9rem;
+    color: rgb(53, 40, 17);
+    margin-top: -10px;
+
+}
+
+.outcast {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add {
+    height: 45px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    padding: 11px;
 }
