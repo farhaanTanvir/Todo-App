@@ -160,3 +160,132 @@ nav img {
     border-radius: 8px;
     padding: 11px;
 }
+
+
+
+
+
+/* ==========================================
+   Todo Form Styles
+   ========================================== */
+
+.todo-form {
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 20px;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.todo-form label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: rgb(53, 40, 17);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Bracketed indicators formatting */
+.format-badge {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(53, 40, 17, 0.6);
+    font-family: inherit;
+}
+
+.format-badge.optional {
+    color: rgba(128, 128, 128, 0.8);
+    font-weight: 500;
+}
+
+/* Form controls styling */
+.todo-form input[type="text"],
+.todo-form input[type="date"],
+.todo-form select,
+.todo-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    color: #2c2c2c;
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.todo-form textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* Focus and hover effects matching hover style in your navbar */
+.todo-form input:hover,
+.todo-form select:hover,
+.todo-form textarea:hover {
+    background-color: #ffffff;
+}
+
+.todo-form input:focus,
+.todo-form select:focus,
+.todo-form textarea:focus {
+    background-color: #ffffff;
+    border-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+.todo-form select {
+    cursor: pointer;
+}
+
+/* Submit button styling */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.add-btn {
+    height: 45px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: rgb(53, 40, 17);
+    background-color: rgb(226, 212, 212);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.add-btn:hover {
+    background-color: rgba(0, 0, 0, 0.164);
+}
+
+.add-btn:active {
+    transform: scale(0.98);
+}

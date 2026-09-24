@@ -20,6 +20,69 @@
   </nav>
 
   <div class="display">
+    <dialog id="todo-constructor"><form method="dialog" class="todo-form">
+<div class="form-group">
+    <label for="title">Title </label>
+    <input 
+      type="text" 
+      id="title" 
+      name="title" 
+      required 
+    />
+  </div>
+
+  <!-- Description [text] -->
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea 
+      id="description" 
+      name="description" 
+      rows="3" 
+      required
+    ></textarea>
+  </div>
+
+  <!-- Row for Due Date & Priority -->
+  <div class="form-row">
+    <!-- Due Date [date input] -->
+    <div class="form-group">
+      <label for="dueDate">Due Date</label>
+      <input 
+        type="date" 
+        id="dueDate" 
+        name="dueDate" 
+        required 
+      />
+    </div>
+
+    <!-- Priority [drop down: low, medium, high] -->
+    <div class="form-group">
+      <label for="priority">Priority</label>
+      <select id="priority" name="priority" required>
+        <option value="" disabled selected>Select priority</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Notes [optional text] -->
+  <div class="form-group">
+    <label for="notes">Notes</label>
+    <textarea 
+      id="notes" 
+      name="notes" 
+      rows="2" 
+      placeholder="Additional notes or references..."
+    ></textarea>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="form-actions">
+    <button type="submit" class="add-btn" id="projectConstructorSubmit">Add Task</button>
+  </div>
+    </form></dialog>
       <div class="outcast"><h1>Title</h1> <button class="add">+ Add Project</button></div> 
 
     <div class="todos">

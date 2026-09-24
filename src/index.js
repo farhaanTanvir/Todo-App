@@ -4,33 +4,36 @@ import { project } from "./projects.js"
 import { listItem } from "./list.js"
 import { renderList } from "./dom.js"
 
-export let listOfProjects = [];
-export let target; // this indicates the project you're inside. You upload the title property here. 
+let listOfProjects = [];
+let target; // this indicates the project you're inside. You upload the title property here. 
 const todoListDOM = document.querySelector('.todos') // takes '.todo-item'
 const addButton = document.querySelector('.add')
+const todoConstructDialog = document.querySelector('#todo-constructor')
+const projectSubmit = document.querySelector('#projectConstructorSubmit')
 
 const coding = new project("Coding")
 const studying = new project("Studying")
 
-const learnLocalHost = new listItem("Learn LocalHost", "blah blah blah", "2026-5-21", "high", "nothing")
-const learnLocalReact = new listItem("Learn React", "blah blah blah", "2026-5-21", "low", "nothing")
-const learnConics = new listItem("master conics", "blah blah blah", "2026-5-25", "very high", "nothing")
+//const learnLocalHost = new listItem("Learn LocalHost", "blah blah blah", "2026-5-21", "high", "nothing")
+//const learnLocalReact = new listItem("Learn React", "blah blah blah", "2026-5-21", "low", "nothing")
+//const learnConics = new listItem("master conics", "blah blah blah", "2026-5-25", "very high", "nothing")
 
-coding.list.push(learnLocalHost);
-coding.list.push(learnLocalReact);
+//coding.list.push(learnLocalHost);
+// coding.list.push(learnLocalReact);
 
-studying.list.push(learnConics);
+// studying.list.push(learnConics);
 // console.log(coding)
 // console.log(studying)
 listOfProjects.push(coding);
 listOfProjects.push(studying);
 
-console.log(listOfProjects.find(todo => todo.name === "Coding").list)
+//console.log(listOfProjects.find(todo => todo.name === "Coding").list)
 
 target = "Coding";
 
 addButton.addEventListener('click', () => {
-    renderList(todoListDOM);
+    todoConstructDialog.showModal()
+
 })
 
 
@@ -42,9 +45,23 @@ addButton.addEventListener('click', () => {
 // You REALLY will need the DOM running to test this stuff properly. This ain't something the console lets you test properly, so get started with the DOM immediately
 
 
-target = "Studying"
-
 // now you gotta write the function for making these objects on input
+
+
+projectSubmit.addEventListener('click', () => {
+    let targetProject = listOfProjects.find(todo => todo.name === target);
+
+    const title = document.querySelector('#title')
+    const desc = document.querySelector('#description')
+    const duedate = document.querySelector('#dueDate')
+    const priority = document.querySelector('#priority')
+    const notes = document.querySelector('notes')
+
+    targetProject.list.push(new listItem(title.value, desc.value, duedate.value, priority.value, notes))
+
+    renderList(todoListDOM, listOfProjects, target);
+})
+
 
 
 
