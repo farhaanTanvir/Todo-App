@@ -12,6 +12,7 @@ renderList(todoListDOM, listOfProjects); // add event listener to inbox
 const addButton = document.querySelector('.add')
 const todoConstructDialog = document.querySelector('#todo-constructor')
 const projectSubmit = document.querySelector('#projectConstructorSubmit')
+const navInbox = document.querySelector('#inbox-nav')
 
 const codingButton = document.querySelector('#coding')
 const studyingButton = document.querySelector('#studying')
@@ -29,7 +30,12 @@ makeProject("Studying")
 
 // target = "Coding";
 
-
+navInbox.addEventListener('click', () => {
+    target = "Inbox"
+    console.log("switched to Inbox project")
+    renderList(todoListDOM, listOfProjects);
+    return target
+})
 
 addButton.addEventListener('click', () => {
     todoConstructDialog.showModal()
