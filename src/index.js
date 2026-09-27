@@ -1,41 +1,54 @@
 import "./style.css";
 import { parseISO, isAfter } from "date-fns";
-import { project } from "./projects.js"
+import { project, listOfProjects, makeProject } from "./projects.js"
 import { listItem } from "./list.js"
-import { renderList } from "./dom.js"
+import { renderList, addTodo, todoListDOM } from "./dom.js"
 
-let listOfProjects = [];
-let target; // this indicates the project you're inside. You upload the title property here. 
-const todoListDOM = document.querySelector('.todos') // takes '.todo-item'
+
+export let target = "Inbox"; // this indicates the project you're inside. You upload the title property here. 
+makeProject("Inbox")
+renderList(todoListDOM, listOfProjects); // add event listener to inbox
+
 const addButton = document.querySelector('.add')
 const todoConstructDialog = document.querySelector('#todo-constructor')
 const projectSubmit = document.querySelector('#projectConstructorSubmit')
 
-const coding = new project("Coding")
-const studying = new project("Studying")
+const codingButton = document.querySelector('#coding')
+const studyingButton = document.querySelector('#studying')
 
-//const learnLocalHost = new listItem("Learn LocalHost", "blah blah blah", "2026-5-21", "high", "nothing")
-//const learnLocalReact = new listItem("Learn React", "blah blah blah", "2026-5-21", "low", "nothing")
-//const learnConics = new listItem("master conics", "blah blah blah", "2026-5-25", "very high", "nothing")
 
-//coding.list.push(learnLocalHost);
-// coding.list.push(learnLocalReact);
+makeProject("Coding")
+makeProject("Studying")
 
-// studying.list.push(learnConics);
-// console.log(coding)
-// console.log(studying)
-listOfProjects.push(coding);
-listOfProjects.push(studying);
+//const coding = new project("Coding")
+//const studying = new project("Studying")
+//istOfProjects.push(coding);
+// listOfProjects.push(studying);
 
 //console.log(listOfProjects.find(todo => todo.name === "Coding").list)
 
-target = "Coding";
+// target = "Coding";
+
+
 
 addButton.addEventListener('click', () => {
     todoConstructDialog.showModal()
 
 })
 
+codingButton.addEventListener('click', () => {
+    target = "Coding"
+    console.log("switched to coding project")
+    renderList(todoListDOM, listOfProjects);
+    return target
+})
+
+studyingButton.addEventListener('click', () => {
+    target = "Studying"
+    console.log("switched to studying project")
+    renderList(todoListDOM, listOfProjects);
+    return target
+})
 
 // how do you make a project? you write an eventlistener function. 
 // it takes all the data from the form and makes an object of project and pushes it directly inside the listOfProjects array
@@ -49,17 +62,7 @@ addButton.addEventListener('click', () => {
 
 
 projectSubmit.addEventListener('click', () => {
-    let targetProject = listOfProjects.find(todo => todo.name === target);
-
-    const title = document.querySelector('#title')
-    const desc = document.querySelector('#description')
-    const duedate = document.querySelector('#dueDate')
-    const priority = document.querySelector('#priority')
-    const notes = document.querySelector('notes')
-
-    targetProject.list.push(new listItem(title.value, desc.value, duedate.value, priority.value, notes))
-
-    renderList(todoListDOM, listOfProjects, target);
+    addTodo(listOfProjects);
 })
 
 

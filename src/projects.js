@@ -1,11 +1,23 @@
+export let listOfProjects = [];
+
 export class project {
     constructor(name) {
         this.name = name
         this.list = []
     }
+    getProject() {
+        return structuredClone(this)
+    }
+
+    addToProject(item) {
+        this.list.push(item)
+    }
 }
 
-// Push, right? Don't see why push's necessary. push will only ever need to push into one array.
+export function makeProject(name) {
+    listOfProjects.push(new project(name))
+    console.log(listOfProjects)
+}
 
 // splice also works on one arary. we just need to give it a way for finding the index
 

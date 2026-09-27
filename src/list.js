@@ -7,5 +7,12 @@ export class listItem {
         this.notes = notes
         this.uuid = self.crypto.randomUUID()
         this.status = false
+        // this.projectName = structuredClone(target)
+    }
+
+    getTodo() {
+        return structuredClone(this)
     }
 }
+
+// think about how you could privatize properties these later

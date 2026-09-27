@@ -161,7 +161,9 @@ nav img {
     padding: 11px;
 }
 
-
+.nav-item {
+    cursor: pointer;
+}
 
 
 
