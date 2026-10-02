@@ -13,9 +13,30 @@
     <div class="id"><img src="./images/avatar-1577909_1280.png" alt="Empty Profile"><p>Farhan</p></div>
     <div class="nav-item  inbox" id="inbox-nav">Inbox</div>
     <div class="nav-item xtra-bottom today">Today</div>
-    <div class="nav-item xtra-bottom">My Projects</div>
-    <div class="nav-item project-item" id="coding">Coding</div>
-    <div class="nav-item project-item" id="studying">Studying</div>
+    <div class="pp xtra-bottom"><p>My Projects</p> <span id="addProject">+</span></div>
+    <div id="project-cont"> 
+    
+</div>
+<dialog id="projectNameCont">
+
+  <form method="dialog" class="todo-form">
+<div class="form-group">
+    <label for="title">What do you want to name your project? </label>
+    <input 
+      type="text" 
+      id="projectTitle" 
+      name="title" 
+      required 
+    />
+  </div>
+
+  <!-- Submit Button -->
+  <div class="form-actions">
+    <button type="submit" class="add-btn" id="makeProjectSubmit">Add Task</button>
+  </div>
+    </form>
+
+</dialog>
 
   </nav>
 
@@ -86,6 +107,7 @@
       <div class="outcast"><h1>Title</h1> <button class="add">+ Add Project</button></div> 
 
     <div class="todos">
+      <dialog id="todo-dialog"></dialog>
       <!-- <div class="todo-item">
         <p class="title">Learn LocalStorage</p>
         <p class="due">21 Sep 2026</p>

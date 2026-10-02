@@ -2,8 +2,9 @@ import "./style.css";
 import { parseISO, isAfter } from "date-fns";
 import { project, listOfProjects, makeProject } from "./projects.js"
 import { listItem } from "./list.js"
-import { renderList, addTodo, todoListDOM } from "./dom.js"
-
+import { renderList, addTodo, todoListDOM, renderProjects, Header, expandTodo } from "./dom.js"
+export const todoDialog = document.querySelector('#todo-dialog')
+document.body.append(todoDialog)
 
 export let target = "Inbox"; // this indicates the project you're inside. You upload the title property here. 
 makeProject("Inbox")
@@ -13,22 +14,28 @@ const addButton = document.querySelector('.add')
 const todoConstructDialog = document.querySelector('#todo-constructor')
 const projectSubmit = document.querySelector('#projectConstructorSubmit')
 const navInbox = document.querySelector('#inbox-nav')
+export const navContainer = document.querySelector('#project-cont')
+const addProjectButton = document.querySelector('#addProject')
+const projectDialog = document.querySelector('#projectNameCont')
+const submitToMakeProject = document.querySelector('#makeProjectSubmit')
+export const todoContainer = document.querySelector('.todos')
 
-const codingButton = document.querySelector('#coding')
-const studyingButton = document.querySelector('#studying')
+
+// add a feature to block if they try to make a project with an existing name
+
+// WHATS LEFT
+
+// making listOfProjects private (1st priority)
+// editing todo
+// deleting todo
 
 
-makeProject("Coding")
-makeProject("Studying")
+// finishing work:
 
-//const coding = new project("Coding")
-//const studying = new project("Studying")
-//istOfProjects.push(coding);
-// listOfProjects.push(studying);
+// turn repetetive code into functions that u call, the current object finder, for example.
+// go through your OOP principles, one principle at a time, through every file
+// make everything as private as possible, work on the attempts that didn't work
 
-//console.log(listOfProjects.find(todo => todo.name === "Coding").list)
-
-// target = "Coding";
 
 navInbox.addEventListener('click', () => {
     target = "Inbox"
@@ -42,42 +49,50 @@ addButton.addEventListener('click', () => {
 
 })
 
-codingButton.addEventListener('click', () => {
-    target = "Coding"
-    console.log("switched to coding project")
-    renderList(todoListDOM, listOfProjects);
+navContainer.addEventListener('click', (event) => {
+    event.stopPropagation();
+    if (event.target.classList.contains("inbox")) { return }
+    const projName = event.target.dataset.name + ""
+    // console.log(projName)
+    target = projName
+    Header.innerText = projName
+    renderList(todoListDOM, listOfProjects)
     return target
 })
-
-studyingButton.addEventListener('click', () => {
-    target = "Studying"
-    console.log("switched to studying project")
-    renderList(todoListDOM, listOfProjects);
-    return target
-})
-
-// how do you make a project? you write an eventlistener function. 
-// it takes all the data from the form and makes an object of project and pushes it directly inside the listOfProjects array
-// then when making todos, you grab an object off of listOfProjects using find()
-// and then you push it inside its array. 
-
-// You REALLY will need the DOM running to test this stuff properly. This ain't something the console lets you test properly, so get started with the DOM immediately
-
-
-// now you gotta write the function for making these objects on input
-
 
 projectSubmit.addEventListener('click', () => {
     addTodo(listOfProjects);
 })
 
+renderProjects()
+
+addProjectButton.addEventListener('click', () => {
+    projectDialog.showModal()
+})
+
+submitToMakeProject.addEventListener('click', () => {
+    const title = document.querySelector('#projectTitle')
+    makeProject(title.value)
+    renderProjects()
+})
 
 
+function closeDialog() {
+    todoDialog.close();
+}
 
+todoContainer.addEventListener('click', (event) => {
+    event.stopPropagation();
+    if (!event.target.classList.contains("expand")) { return }
+    // console.log(event.target.dataset.uuid)
+    expandTodo(event.target.dataset.title);
 
-
-
-
+    todoDialog.showModal();
+    let closeExpandedDialog = document.querySelector('.close-dialog-btn');
+    //const clone = closeExpandedDialog.cloneNode(true);
+    closeExpandedDialog.addEventListener('click', closeDialog)
+    closeExpandedDialog.addEventListener('click', closeDialog)
+})
 
 
 

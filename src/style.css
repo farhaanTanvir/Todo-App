@@ -17,11 +17,12 @@ nav {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 30px;
+    padding: 30px 20px 30px 30px;
     font-size: 1.25rem;
     letter-spacing: 1.6px;
     font-family: 'Nunito', sans-serif;
     font-weight: 600;
+    width: 14vw;
 }
 
 .display {
@@ -44,6 +45,37 @@ nav {
     width: 100%;
     padding: 7px;
     border-radius: 10px;
+
+}
+
+.pp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    width: 100%;
+    padding: 7px;
+    border-radius: 10px;
+}
+
+.pp p {
+
+    margin: 0;
+    padding: 0;
+}
+
+#addProject {
+    margin: 0;
+    padding-left: 7px;
+    padding-right: 6px;
+    border-radius: 10px;
+
+}
+
+#addProject:hover {
+    background-color: rgba(0, 0, 0, 0.24);
+    cursor: pointer
 }
 
 .xtra-bottom {
@@ -146,6 +178,26 @@ nav img {
 
 }
 
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons-cont button {
+    padding: 8px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    margin-right: 10px
+}
+
+.buttons-cont button:hover {
+    background-color: rgba(187, 167, 167, 0.24);
+    cursor: pointer;
+    transition: 0.1s
+}
+
 .outcast {
     display: flex;
     flex-direction: row;
@@ -167,12 +219,8 @@ nav img {
 
 
 
-/* ==========================================
-   Todo Form Styles
-   ========================================== */
-
 .todo-form {
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgb(255, 255, 255);
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 12px;
     padding: 24px;
@@ -231,7 +279,7 @@ nav img {
     font-family: 'Nunito', sans-serif;
     font-size: 0.95rem;
     color: #2c2c2c;
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgb(255, 255, 255);
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     outline: none;
@@ -290,4 +338,120 @@ nav img {
 
 .add-btn:active {
     transform: scale(0.98);
+}
+
+dialog {
+    background-color: rgba(0, 0, 0, 0) !important;
+    border: none;
+}
+
+/* Container styling for the expanded view inside the dialog */
+.expanded-todo {
+    font-family: 'Nunito', sans-serif;
+    color: rgb(53, 40, 17);
+    background-color: rgb(226, 212, 212);
+    /* Matches your nav background */
+    padding: 40px;
+    width: 550px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+
+}
+
+/* Header containing the title and close button */
+.expanded-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    padding-bottom: 16px;
+    gap: 16px;
+}
+
+.expanded-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    word-break: break-word;
+    /* Min-height in case the title is empty initially */
+    min-height: 32px;
+}
+
+/* Close Button */
+.close-dialog-btn {
+    background: transparent;
+    border: none;
+    color: rgb(53, 40, 17);
+    font-size: 2rem;
+    line-height: 1;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    /* Pulling it slightly up and right so it aligns nicely */
+    margin-top: -4px;
+    margin-right: -8px;
+}
+
+.close-dialog-btn:hover {
+    background-color: rgba(0, 0, 0, 0.164);
+    /* Matches your existing hover state */
+}
+
+/* Body layout */
+.expanded-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.detail-row {
+    display: flex;
+    gap: 16px;
+}
+
+.detail-row .detail-group {
+    flex: 1;
+}
+
+.detail-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Labels */
+.detail-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(53, 40, 17, 0.7);
+}
+
+/* Read-only Data Containers */
+.detail-value {
+    background-color: rgb(255, 255, 255);
+    /* Slightly transparent white */
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 1rem;
+    min-height: 24px;
+    /* Keeps layout stable when empty */
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    /* Preserves line breaks for descriptions/notes */
+}
+
+.detail-value.min-tall {
+    min-height: 60px;
+    /* Gives bigger boxes for text-heavy fields */
 }
