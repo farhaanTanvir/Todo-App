@@ -1,16 +1,14 @@
 import { target, navContainer, todoDialog } from "./index.js"
-import { listItem } from "./list.js"
+// import { listItem } from "./list.js"
 export const todoListDOM = document.querySelector('.todos') // takes '.todo-item'
 export const Header = document.querySelector('h1')
-import { project, listOfProjects, makeProject } from "./projects.js"
+import { getProjListCopy } from "./projects.js"
 
 const expanded = document.querySelector('.expand')
 
-export function renderList(display, list) {
-  let projectObject = list.find(todo => todo.getProject().name === target)
+export function renderList(display) {
+  let projectObject = getProjListCopy().find(todo => todo.name === target)
   Header.innerText = projectObject.name
-  //console.log("THIS IS THE PROJECT OBJECT")
-  //console.log(projectObject)
   display.innerHTML = ""
   projectObject.list.forEach((item) => {
     display.insertAdjacentHTML("beforeend", `<div class="todo-item">
@@ -23,26 +21,12 @@ export function renderList(display, list) {
   })
 }
 
-export function addTodo(list) {
-  let targetProject = list.find(todo => todo.getProject().name === target);
-  const title = document.querySelector('#title')
-  const desc = document.querySelector('#description')
-  const duedate = document.querySelector('#dueDate')
-  const priority = document.querySelector('#priority')
-  const notes = document.querySelector('#notes')
-
-  targetProject.addToProject(new listItem(title.value, desc.value, duedate.value, priority.value, notes.value, target))
-
-  renderList(todoListDOM, listOfProjects);
-
-}
-
 
 // Target: creating todos dynamically. 
 
 export function renderProjects() {
   navContainer.innerHTML = ""
-  listOfProjects.forEach((item) => {
+  getProjListCopy().forEach((item) => {
 
     if (item.name === "Inbox") {
       return
@@ -53,11 +37,8 @@ export function renderProjects() {
 }
 
 export function expandTodo(targetUUID) {
-  let targetProject = listOfProjects.find(todo => todo.getProject().name === target); // turn this into a function
-  // console.log(targetProject)
+  let targetProject = getProjListCopy().find(todo => todo.name === target); // turn this into a function
   let targetTodo = targetProject.list.find(todo => todo.title === targetUUID)
-
-  //console.log(targetTodo)
   todoDialog.innerHTML = ""
   todoDialog.insertAdjacentHTML('beforeend', `
 <div class="expanded-todo">

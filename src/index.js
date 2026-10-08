@@ -1,14 +1,14 @@
 import "./style.css";
 import { parseISO, isAfter } from "date-fns";
-import { project, listOfProjects, makeProject } from "./projects.js"
+import { project, makeProject, addTodo } from "./projects.js"
 import { listItem } from "./list.js"
-import { renderList, addTodo, todoListDOM, renderProjects, Header, expandTodo } from "./dom.js"
+import { renderList, todoListDOM, renderProjects, Header, expandTodo } from "./dom.js"
 export const todoDialog = document.querySelector('#todo-dialog')
 document.body.append(todoDialog)
 
 export let target = "Inbox"; // this indicates the project you're inside. You upload the title property here. 
 makeProject("Inbox")
-renderList(todoListDOM, listOfProjects); // add event listener to inbox
+renderList(todoListDOM); // add event listener to inbox
 
 const addButton = document.querySelector('.add')
 const todoConstructDialog = document.querySelector('#todo-constructor')
@@ -35,12 +35,13 @@ export const todoContainer = document.querySelector('.todos')
 // turn repetetive code into functions that u call, the current object finder, for example.
 // go through your OOP principles, one principle at a time, through every file
 // make everything as private as possible, work on the attempts that didn't work
+// clean up import exports by moving things in the right place
 
 
 navInbox.addEventListener('click', () => {
     target = "Inbox"
     console.log("switched to Inbox project")
-    renderList(todoListDOM, listOfProjects);
+    renderList(todoListDOM);
     return target
 })
 
@@ -56,12 +57,12 @@ navContainer.addEventListener('click', (event) => {
     // console.log(projName)
     target = projName
     Header.innerText = projName
-    renderList(todoListDOM, listOfProjects)
+    renderList(todoListDOM)
     return target
 })
 
 projectSubmit.addEventListener('click', () => {
-    addTodo(listOfProjects);
+    addTodo();
 })
 
 renderProjects()
