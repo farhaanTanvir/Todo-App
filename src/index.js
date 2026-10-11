@@ -1,6 +1,6 @@
 import "./style.css";
 import { parseISO, isAfter } from "date-fns";
-import { project, makeProject, addTodo } from "./projects.js"
+import { project, makeProject, addTodo, removeTodo } from "./projects.js"
 import { listItem } from "./list.js"
 import { renderList, todoListDOM, renderProjects, Header, expandTodo } from "./dom.js"
 export const todoDialog = document.querySelector('#todo-dialog')
@@ -21,13 +21,16 @@ const submitToMakeProject = document.querySelector('#makeProjectSubmit')
 export const todoContainer = document.querySelector('.todos')
 
 
-// add a feature to block if they try to make a project with an existing name
+
 
 // WHATS LEFT
 
-// making listOfProjects private (1st priority)
 // editing todo
 // deleting todo
+// add a feature to block if they try to make a project with an existing name
+// date formatting
+// the "Today" tab
+// flip the display array so we get newer stuff first
 
 
 // finishing work:
@@ -95,7 +98,12 @@ todoContainer.addEventListener('click', (event) => {
     closeExpandedDialog.addEventListener('click', closeDialog)
 })
 
-
+todoContainer.addEventListener('click', (event) => {
+    event.stopPropagation();
+    if (!event.target.classList.contains("delete")) { return }
+    removeTodo(event.target.dataset.title)
+    renderList(todoListDOM)
+})
 
 
 /* const dateTest = new Date("2026-03-05")

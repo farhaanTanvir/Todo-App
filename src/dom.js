@@ -1,13 +1,16 @@
 import { target, navContainer, todoDialog } from "./index.js"
-// import { listItem } from "./list.js"
 export const todoListDOM = document.querySelector('.todos') // takes '.todo-item'
 export const Header = document.querySelector('h1')
 import { getProjListCopy } from "./projects.js"
 
 const expanded = document.querySelector('.expand')
 
+function findProject() {
+  return getProjListCopy().find(todo => todo.name === target)
+}
+
 export function renderList(display) {
-  let projectObject = getProjListCopy().find(todo => todo.name === target)
+  let projectObject = findProject()
   Header.innerText = projectObject.name
   display.innerHTML = ""
   projectObject.list.forEach((item) => {
@@ -16,10 +19,11 @@ export function renderList(display) {
         <p class="title">${item.title}</p>
         <p class="due">${item.due}</p>
         </div>
-        <div class="buttons-cont"><button id="expand" class="expand" data-title="${item.title}">Expand</button><button id="delete">Delete</button></div>
+        <div class="buttons-cont"><button id="expand" class="expand" data-title="${item.title}">Expand</button><button id="delete" class="delete">Delete</button></div>
       </div>`)
   })
 }
+
 
 
 // Target: creating todos dynamically. 
@@ -37,7 +41,7 @@ export function renderProjects() {
 }
 
 export function expandTodo(targetUUID) {
-  let targetProject = getProjListCopy().find(todo => todo.name === target); // turn this into a function
+  let targetProject = findProject() // turn this into a function
   let targetTodo = targetProject.list.find(todo => todo.title === targetUUID)
   todoDialog.innerHTML = ""
   todoDialog.insertAdjacentHTML('beforeend', `

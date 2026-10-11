@@ -8,8 +8,12 @@ export function getProjListCopy() {
     return structuredClone(listOfProjects)
 }
 
+function getProjectNoCopy() {
+    return listOfProjects.find(todo => todo.name === target);
+}
+
 export function addTodo() {
-    let targetProject = listOfProjects.find(todo => todo.name === target);
+    let targetProject = getProjectNoCopy()
     const title = document.querySelector('#title')
     const desc = document.querySelector('#description')
     const duedate = document.querySelector('#dueDate')
@@ -38,5 +42,11 @@ export class project {
 export function makeProject(name) {
     listOfProjects.push(new project(name))
     console.log(listOfProjects)
+}
+
+export function removeTodo(title) {
+    let targetProject = getProjectNoCopy()
+    let targetTodoIndex = targetProject.list.findIndex((target) => { target.title === title })
+    targetProject.list.splice(targetTodoIndex, 1)
 }
 
