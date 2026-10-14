@@ -41,6 +41,76 @@
   </nav>
 
   <div class="display">
+
+    <dialog id="editTodo">
+
+      <!-- Paste this inside <dialog id="editTodo"> ... </dialog> -->
+<form method="dialog" class="todo-form edit-todo-form">
+  <h2 class="edit-heading">Edit Todo</h2>
+
+  <!-- Title [text] -->
+  <div class="form-group">
+    <label for="editTitle">Title</label>
+    <input
+      type="text"
+      id="editTitle"
+      name="title"
+    />
+  </div>
+
+  <!-- Description [textarea] -->
+  <div class="form-group">
+    <label for="editDescription">Description</label>
+    <textarea
+      id="editDescription"
+      name="description"
+      rows="3"
+    ></textarea>
+  </div>
+
+  <!-- Row for Due Date & Priority -->
+  <div class="form-row">
+    <!-- Due Date [date input] -->
+    <div class="form-group">
+      <label for="editDueDate">Due Date</label>
+      <input
+        type="date"
+        id="editDueDate"
+        name="dueDate"
+      />
+    </div>
+
+    <!-- Priority [drop down: low, medium, high] -->
+    <div class="form-group">
+      <label for="editPriority">Priority</label>
+      <select id="editPriority" name="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Notes [textarea] -->
+  <div class="form-group">
+    <label for="editNotes">Notes</label>
+    <textarea
+      id="editNotes"
+      name="notes"
+      rows="2"
+      placeholder="Additional notes or references..."
+    ></textarea>
+  </div>
+
+  <!-- Save / Cancel -->
+  <div class="form-actions edit-actions">
+    <button type="submit" class="save-btn" id="saveEdit">Save</button>
+    <button type="button" class="cancel-btn" id="cancelEdit">Cancel</button>
+  </div>
+</form>
+
+    </dialog>
+
     <dialog id="todo-constructor"><form method="dialog" class="todo-form">
 <div class="form-group">
     <label for="title">Title </label>

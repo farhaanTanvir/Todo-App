@@ -12,7 +12,7 @@ export class listItem {
     getTodo() {
         return structuredClone(this)
     }
-    
+
 }
 
 // think about how you could privatize properties these later

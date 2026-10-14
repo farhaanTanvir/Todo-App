@@ -1,6 +1,6 @@
 import "./style.css";
 import { parseISO, isAfter } from "date-fns";
-import { project, makeProject, addTodo, removeTodo } from "./projects.js"
+import { project, makeProject, addTodo, removeTodo, editTodo } from "./projects.js"
 import { listItem } from "./list.js"
 import { renderList, todoListDOM, renderProjects, Header, expandTodo } from "./dom.js"
 export const todoDialog = document.querySelector('#todo-dialog')
@@ -19,6 +19,12 @@ const addProjectButton = document.querySelector('#addProject')
 const projectDialog = document.querySelector('#projectNameCont')
 const submitToMakeProject = document.querySelector('#makeProjectSubmit')
 export const todoContainer = document.querySelector('.todos')
+const editDialog = document.querySelector('#editTodo')
+
+const saveEditBtn = document.getElementById("saveEdit");
+const cancelEditBtn = document.getElementById("cancelEdit");
+
+//console.log(saveEditBtn)
 
 
 
@@ -27,10 +33,11 @@ export const todoContainer = document.querySelector('.todos')
 
 // editing todo
 // deleting todo
-// add a feature to block if they try to make a project with an existing name
 // date formatting
 // the "Today" tab
 // flip the display array so we get newer stuff first
+// prevent todos from being created before every field is present
+// add a feature to block if they try to make a project with an existing name
 
 
 // finishing work:
@@ -40,6 +47,22 @@ export const todoContainer = document.querySelector('.todos')
 // make everything as private as possible, work on the attempts that didn't work
 // clean up import exports by moving things in the right place
 
+let targetTitle = null // maybe privatize this later?
+
+saveEditBtn.addEventListener('click', () => {
+    if (targetTitle === null) { console.log("oopsie daisy"); return }
+    editTodo(targetTitle)
+})
+
+todoContainer.addEventListener('click', (event) => {
+    event.stopPropagation()
+
+    if (!event.target.classList.contains("editInitiateBtn")) { return }
+    //  console.log("click happening")
+    editDialog.showModal()
+    // console.log(event.target.dataset.title)
+    targetTitle = event.target.dataset.title
+})
 
 navInbox.addEventListener('click', () => {
     target = "Inbox"
@@ -95,7 +118,7 @@ todoContainer.addEventListener('click', (event) => {
     let closeExpandedDialog = document.querySelector('.close-dialog-btn');
     //const clone = closeExpandedDialog.cloneNode(true);
     closeExpandedDialog.addEventListener('click', closeDialog)
-    closeExpandedDialog.addEventListener('click', closeDialog)
+    closeExpandedDialog.addEventListener('click', closeDialog) // work on this guy, he ain't needed
 })
 
 todoContainer.addEventListener('click', (event) => {

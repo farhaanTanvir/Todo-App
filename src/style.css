@@ -455,3 +455,58 @@ dialog {
     min-height: 60px;
     /* Gives bigger boxes for text-heavy fields */
 }
+
+
+/* Add to the bottom of your existing stylesheet.
+   The form reuses .todo-form, .form-group, .form-row and .form-actions,
+   so only the heading and the two buttons need new rules. */
+
+.edit-heading {
+    margin: 0;
+    padding-bottom: 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: rgb(53, 40, 17);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.edit-actions {
+    gap: 12px;
+}
+
+.save-btn,
+.cancel-btn {
+    height: 45px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 8px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.save-btn {
+    background-color: rgb(76, 140, 84);
+}
+
+.save-btn:hover {
+    background-color: rgb(60, 118, 68);
+}
+
+.cancel-btn {
+    background-color: rgb(184, 70, 70);
+}
+
+.cancel-btn:hover {
+    background-color: rgb(158, 55, 55);
+}
+
+.save-btn:active,
+.cancel-btn:active {
+    transform: scale(0.98);
+}
