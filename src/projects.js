@@ -51,19 +51,13 @@ export function removeTodo(title) {
     targetProject.list.splice(targetTodoIndex, 1)
 }
 
-export function editTodo(title) {
-    //console.log(title)
+export function editTodo(index) {
     let project = getProjectNoCopy();
-    // console.log(project)
-    // console.log(project.list)
-    let index = project.list.findIndex((target) => { return target.title === title })
-
-    console.log(index)
-    // Find the index of the targeted todo
-    // open modal for the new input (find how existing information can be placed there. looks like there's a value property for this directly)
-    // save button click does this:
-
-    // creates the object with the new information
-    // splices the existing todo object out and inserts the new one right in its place
-    // renders screen just as the modal closes
+    const editTitle = document.getElementById("editTitle").value;
+    const editDescription = document.getElementById("editDescription").value;
+    const editDueDate = document.getElementById("editDueDate").value;
+    const editPriority = document.getElementById("editPriority").value;
+    const editNotes = document.getElementById("editNotes").value;
+    project.list.splice(index, 1, new listItem(editTitle, editDescription, editDueDate, editPriority, editNotes))
+    renderList(todoListDOM)
 }

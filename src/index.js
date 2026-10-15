@@ -1,6 +1,6 @@
 import "./style.css";
 import { parseISO, isAfter } from "date-fns";
-import { project, makeProject, addTodo, removeTodo, editTodo } from "./projects.js"
+import { project, makeProject, addTodo, removeTodo, editTodo, getProjListCopy } from "./projects.js"
 import { listItem } from "./list.js"
 import { renderList, todoListDOM, renderProjects, Header, expandTodo } from "./dom.js"
 export const todoDialog = document.querySelector('#todo-dialog')
@@ -31,13 +31,12 @@ const cancelEditBtn = document.getElementById("cancelEdit");
 
 // WHATS LEFT
 
-// editing todo
-// deleting todo
 // date formatting
 // the "Today" tab
 // flip the display array so we get newer stuff first
 // prevent todos from being created before every field is present
 // add a feature to block if they try to make a project with an existing name
+// something to mark a todo complete
 
 
 // finishing work:
@@ -47,21 +46,42 @@ const cancelEditBtn = document.getElementById("cancelEdit");
 // make everything as private as possible, work on the attempts that didn't work
 // clean up import exports by moving things in the right place
 
-let targetTitle = null // maybe privatize this later?
+let targetIndexForEdit = null // maybe privatize this later?
 
 saveEditBtn.addEventListener('click', () => {
-    if (targetTitle === null) { console.log("oopsie daisy"); return }
-    editTodo(targetTitle)
+    if (targetIndexForEdit === null) { console.log("oopsie daisy"); return }
+    editTodo(targetIndexForEdit)
 })
+
+function targetProjectFinder() {
+    let projListCopy = getProjListCopy()
+    let targetProject = projListCopy.find(todo => todo.name === target)
+    return targetProject
+}
+
+function indexFinder(title) {
+    let targetProject = targetProjectFinder()
+    return targetProject.list.findIndex((target) => { return target.title === title })
+}
+
+function editDialogOpener(indexOfTarget) {
+    let targetProject = targetProjectFinder()
+    let targetTodo = targetProject.list[indexOfTarget]
+    document.getElementById("editTitle").value = targetTodo.title;
+    document.getElementById("editDescription").value = targetTodo.desc;
+    document.getElementById("editDueDate").value = targetTodo.due;
+    document.getElementById("editPriority").value = targetTodo.priority;
+    document.getElementById("editNotes").value = targetTodo.notes;
+
+    editDialog.showModal()
+}
 
 todoContainer.addEventListener('click', (event) => {
     event.stopPropagation()
-
     if (!event.target.classList.contains("editInitiateBtn")) { return }
-    //  console.log("click happening")
-    editDialog.showModal()
-    // console.log(event.target.dataset.title)
-    targetTitle = event.target.dataset.title
+    let index = indexFinder(event.target.dataset.title)
+    editDialogOpener(index)
+    targetIndexForEdit = index
 })
 
 navInbox.addEventListener('click', () => {
