@@ -510,3 +510,10 @@ dialog {
 .cancel-btn:active {
     transform: scale(0.98);
 }
+
+
+
+
+#addPanelCancel {
+    margin-right: 100px
+}

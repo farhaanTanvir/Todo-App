@@ -2,6 +2,7 @@ import { target, navContainer, todoDialog } from "./index.js"
 export const todoListDOM = document.querySelector('.todos') // takes '.todo-item'
 export const Header = document.querySelector('h1')
 import { getProjListCopy } from "./projects.js"
+import { parseISO, format } from "date-fns"
 
 const expanded = document.querySelector('.expand')
 
@@ -9,15 +10,21 @@ function findProject() {
   return getProjListCopy().find(todo => todo.name === target)
 }
 
+function formatDate(dateStr) {
+  const date = parseISO(dateStr);
+  return format(date, 'MMMM d, yyyy');
+}
+
 export function renderList(display) {
   let projectObject = findProject()
   Header.innerText = projectObject.name
   display.innerHTML = ""
+  projectObject.list.reverse()
   projectObject.list.forEach((item) => {
     display.insertAdjacentHTML("beforeend", `<div class="todo-item">
       <div>
         <p class="title">${item.title}</p>
-        <p class="due">${item.due}</p>
+        <p class="due">${formatDate(item.due)}</p>
         </div>
         <div class="buttons-cont"><button id="expand" class="expand" data-title="${item.title}">Expand</button><button id="delete" class="delete" data-title="${item.title}">Delete</button><button id="editInitiateBtn" class="editInitiateBtn" data-title="${item.title}">Edit</button></div>
       </div>`)
@@ -30,7 +37,7 @@ export function renderList(display) {
 
 export function renderProjects() {
   navContainer.innerHTML = ""
-  getProjListCopy().forEach((item) => {
+  getProjListCopy().reverse().forEach((item) => {
 
     if (item.name === "Inbox") {
       return
@@ -60,7 +67,7 @@ export function expandTodo(targetUUID) {
         <div class="detail-row">
             <div class="detail-group">
                 <span class="detail-label">Due Date</span>
-                <div class="detail-value">${targetTodo.dueDate}</div>
+                <div class="detail-value">${formatDate(targetTodo.due)}</div>
             </div>
             
             <div class="detail-group">

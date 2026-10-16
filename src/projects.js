@@ -1,7 +1,6 @@
 import { renderList, todoListDOM } from './dom.js'
 import { listItem } from './list.js'
-import { target } from './index.js'
-
+import { target, todoConstructDialog, editDialog } from './index.js'
 let listOfProjects = [];
 
 export function getProjListCopy() {
@@ -19,9 +18,21 @@ export function addTodo() {
     const duedate = document.querySelector('#dueDate')
     const priority = document.querySelector('#priority')
     const notes = document.querySelector('#notes')
+    // let foundCopy = false
+    const test = getProjListCopy()
+    for (const project of test) {
+        for (const todo of project.list) {
+            if (todo.title === title.value) {
+                alert("You cannot make Two todos of the same name!");
 
+                // foundCopy = true
+                return
+            }
+        }
+    }
+    // if (foundCopy === false) { todoConstructDialog.close(); }
     targetProject.addToProject(new listItem(title.value, desc.value, duedate.value, priority.value, notes.value, target))
-
+    todoConstructDialog.close()
     renderList(todoListDOM);
 }
 
@@ -41,7 +52,6 @@ export class project {
 
 export function makeProject(name) {
     listOfProjects.push(new project(name))
-    console.log(listOfProjects)
 }
 
 export function removeTodo(title) {
@@ -58,6 +68,18 @@ export function editTodo(index) {
     const editDueDate = document.getElementById("editDueDate").value;
     const editPriority = document.getElementById("editPriority").value;
     const editNotes = document.getElementById("editNotes").value;
+    const test = getProjListCopy()
+    for (const project of test) {
+        for (const todo of project.list) {
+            if (todo.title === editTitle) {
+                alert("You cannot make Two todos of the same name!");
+
+                // foundCopy = true
+                return
+            }
+        }
+    }
+    editDialog.close()
     project.list.splice(index, 1, new listItem(editTitle, editDescription, editDueDate, editPriority, editNotes))
     renderList(todoListDOM)
 }

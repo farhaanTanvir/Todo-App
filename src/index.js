@@ -1,5 +1,5 @@
 import "./style.css";
-import { parseISO, isAfter } from "date-fns";
+// import { parseISO, isAfter } from "date-fns";
 import { project, makeProject, addTodo, removeTodo, editTodo, getProjListCopy } from "./projects.js"
 import { listItem } from "./list.js"
 import { renderList, todoListDOM, renderProjects, Header, expandTodo } from "./dom.js"
@@ -11,15 +11,17 @@ makeProject("Inbox")
 renderList(todoListDOM); // add event listener to inbox
 
 const addButton = document.querySelector('.add')
-const todoConstructDialog = document.querySelector('#todo-constructor')
+export const todoConstructDialog = document.querySelector('#todo-constructor')
 const projectSubmit = document.querySelector('#projectConstructorSubmit')
+const projectCancel = document.querySelector('#addPanelCancel')
 const navInbox = document.querySelector('#inbox-nav')
 export const navContainer = document.querySelector('#project-cont')
 const addProjectButton = document.querySelector('#addProject')
 const projectDialog = document.querySelector('#projectNameCont')
 const submitToMakeProject = document.querySelector('#makeProjectSubmit')
 export const todoContainer = document.querySelector('.todos')
-const editDialog = document.querySelector('#editTodo')
+export const editDialog = document.querySelector('#editTodo')
+// export const openEdit = document.querySelector('#editInitiateBtn')
 
 const saveEditBtn = document.getElementById("saveEdit");
 const cancelEditBtn = document.getElementById("cancelEdit");
@@ -31,11 +33,8 @@ const cancelEditBtn = document.getElementById("cancelEdit");
 
 // WHATS LEFT
 
-// date formatting
 // the "Today" tab
-// flip the display array so we get newer stuff first
 // prevent todos from being created before every field is present
-// add a feature to block if they try to make a project with an existing name
 // something to mark a todo complete
 
 
@@ -51,6 +50,9 @@ let targetIndexForEdit = null // maybe privatize this later?
 saveEditBtn.addEventListener('click', () => {
     if (targetIndexForEdit === null) { console.log("oopsie daisy"); return }
     editTodo(targetIndexForEdit)
+})
+cancelEditBtn.addEventListener('click', () => {
+    editDialog.close()
 })
 
 function targetProjectFinder() {
@@ -78,6 +80,7 @@ function editDialogOpener(indexOfTarget) {
 
 todoContainer.addEventListener('click', (event) => {
     event.stopPropagation()
+    // event.preventDefault()
     if (!event.target.classList.contains("editInitiateBtn")) { return }
     let index = indexFinder(event.target.dataset.title)
     editDialogOpener(index)
@@ -107,8 +110,13 @@ navContainer.addEventListener('click', (event) => {
     return target
 })
 
-projectSubmit.addEventListener('click', () => {
+projectSubmit.addEventListener('click', (e) => {
+    e.preventDefault()
     addTodo();
+})
+
+projectCancel.addEventListener('click', () => {
+    todoConstructDialog.close()
 })
 
 renderProjects()
