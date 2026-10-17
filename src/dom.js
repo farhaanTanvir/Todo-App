@@ -23,7 +23,7 @@ export function renderList(display) {
   projectObject.list.forEach((item) => {
     display.insertAdjacentHTML("beforeend", `<div class="todo-item">
       <div>
-        <p class="title">${item.title}</p>
+        <p class="title ${item.priority}">${item.title}</p>
         <p class="due">${formatDate(item.due)}</p>
         </div>
         <div class="buttons-cont"><button id="expand" class="expand" data-title="${item.title}">Expand</button><button id="delete" class="delete" data-title="${item.title}">Delete</button><button id="editInitiateBtn" class="editInitiateBtn" data-title="${item.title}">Edit</button></div>

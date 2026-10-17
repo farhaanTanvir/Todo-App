@@ -517,3 +517,15 @@ dialog {
 #addPanelCancel {
     margin-right: 100px
 }
+
+.low {
+    color: rgb(12, 102, 12);
+}
+
+.medium {
+    color: rgb(26, 26, 143);
+}
+
+.high {
+    color: rgb(143, 8, 8)
+}

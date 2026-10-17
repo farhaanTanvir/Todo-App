@@ -26,23 +26,27 @@ export const editDialog = document.querySelector('#editTodo')
 const saveEditBtn = document.getElementById("saveEdit");
 const cancelEditBtn = document.getElementById("cancelEdit");
 
-//console.log(saveEditBtn)
+
 
 
 
 
 // WHATS LEFT
 
-// the "Today" tab
-// prevent todos from being created before every field is present
-// something to mark a todo complete
+// the "Today" tab (OPTIONAL)
+// something to mark a todo complete (OPTIONAL)
+// clear input boxes after every todo creation (LAST THING TO DO)
+
+
+// prevent input from setting a due date in the past
+
 
 
 // finishing work:
 
-// turn repetetive code into functions that u call, the current object finder, for example.
+
 // go through your OOP principles, one principle at a time, through every file
-// make everything as private as possible, work on the attempts that didn't work
+// make everything as private as possible, work on the attempts that didn't work (look up if you even need to bother for a fkn string variable)
 // clean up import exports by moving things in the right place
 
 let targetIndexForEdit = null // maybe privatize this later?

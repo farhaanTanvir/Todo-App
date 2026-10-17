@@ -11,6 +11,10 @@ function getProjectNoCopy() {
     return listOfProjects.find(todo => todo.name === target);
 }
 
+function warnEmptyInputFields() {
+    alert("You have not filled out every input required")
+}
+
 export function addTodo() {
     let targetProject = getProjectNoCopy()
     const title = document.querySelector('#title')
@@ -18,6 +22,18 @@ export function addTodo() {
     const duedate = document.querySelector('#dueDate')
     const priority = document.querySelector('#priority')
     const notes = document.querySelector('#notes')
+
+    if (title.value === "") {
+        warnEmptyInputFields()
+        return
+    } else if (desc.value === "") {
+        warnEmptyInputFields()
+        return
+    } else if (duedate.value === "") {
+        warnEmptyInputFields()
+        return
+    }
+
     // let foundCopy = false
     const test = getProjListCopy()
     for (const project of test) {
@@ -68,7 +84,20 @@ export function editTodo(index) {
     const editDueDate = document.getElementById("editDueDate").value;
     const editPriority = document.getElementById("editPriority").value;
     const editNotes = document.getElementById("editNotes").value;
+
     const test = getProjListCopy()
+
+    if (editTitle === "") {
+        warnEmptyInputFields()
+        return
+    } else if (editDescription === "") {
+        warnEmptyInputFields()
+        return
+    } else if (editDueDate === "") {
+        warnEmptyInputFields()
+        return
+    }
+
     for (const project of test) {
         for (const todo of project.list) {
             if (todo.title === editTitle) {
