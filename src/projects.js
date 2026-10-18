@@ -1,6 +1,7 @@
 import { renderList, todoListDOM } from './dom.js'
 import { listItem } from './list.js'
 import { target, todoConstructDialog, editDialog } from './index.js'
+import { parseISO, isPast } from "date-fns"
 let listOfProjects = [];
 
 export function getProjListCopy() {
@@ -13,6 +14,10 @@ function getProjectNoCopy() {
 
 function warnEmptyInputFields() {
     alert("You have not filled out every input required")
+}
+
+function warnPastDate() {
+    alert("Due date cannot be in the past!")
 }
 
 export function addTodo() {
@@ -31,6 +36,11 @@ export function addTodo() {
         return
     } else if (duedate.value === "") {
         warnEmptyInputFields()
+        return
+    }
+
+    if (isPast(parseISO(duedate.value))) {
+        warnPastDate()
         return
     }
 
@@ -95,6 +105,11 @@ export function editTodo(index) {
         return
     } else if (editDueDate === "") {
         warnEmptyInputFields()
+        return
+    }
+
+    if (isPast(parseISO(editDueDate))) {
+        warnPastDate()
         return
     }
 
