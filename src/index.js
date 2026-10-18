@@ -1,14 +1,12 @@
+// index.js
 import "./style.css";
-// import { parseISO, isAfter } from "date-fns";
-import { project, makeProject, addTodo, removeTodo, editTodo, getProjListCopy } from "./projects.js"
-import { listItem } from "./list.js"
+import { makeProject, addTodo, removeTodo, editTodo, getProjListCopy } from "./projects.js"
 import { renderList, todoListDOM, renderProjects, Header, expandTodo } from "./dom.js"
+
 export const todoDialog = document.querySelector('#todo-dialog')
 document.body.append(todoDialog)
 
 export let target = "Inbox"; // this indicates the project you're inside. You upload the title property here. 
-makeProject("Inbox")
-renderList(todoListDOM); // add event listener to inbox
 
 const addButton = document.querySelector('.add')
 export const todoConstructDialog = document.querySelector('#todo-constructor')
@@ -19,16 +17,14 @@ export const navContainer = document.querySelector('#project-cont')
 const addProjectButton = document.querySelector('#addProject')
 const projectDialog = document.querySelector('#projectNameCont')
 const submitToMakeProject = document.querySelector('#makeProjectSubmit')
-export const todoContainer = document.querySelector('.todos')
+const todoContainer = document.querySelector('.todos')
 export const editDialog = document.querySelector('#editTodo')
-// export const openEdit = document.querySelector('#editInitiateBtn')
-
 const saveEditBtn = document.getElementById("saveEdit");
 const cancelEditBtn = document.getElementById("cancelEdit");
 
-
-
-
+makeProject("Inbox")
+renderList(todoListDOM);
+renderProjects()
 
 
 // WHATS LEFT
@@ -38,18 +34,13 @@ const cancelEditBtn = document.getElementById("cancelEdit");
 // clear input boxes after every todo creation (LAST THING TO DO)
 
 
-// prevent input from setting a due date in the past
-
-
-
 // finishing work:
 
-
+// fix that duplicate event listener bug down below
 // go through your OOP principles, one principle at a time, through every file
-// make everything as private as possible, work on the attempts that didn't work (look up if you even need to bother for a fkn string variable)
-// clean up import exports by moving things in the right place
 
-let targetIndexForEdit = null // maybe privatize this later?
+
+let targetIndexForEdit = null
 
 saveEditBtn.addEventListener('click', () => {
     if (targetIndexForEdit === null) { console.log("oopsie daisy"); return }
@@ -73,6 +64,7 @@ function indexFinder(title) {
 function editDialogOpener(indexOfTarget) {
     let targetProject = targetProjectFinder()
     let targetTodo = targetProject.list[indexOfTarget]
+
     document.getElementById("editTitle").value = targetTodo.title;
     document.getElementById("editDescription").value = targetTodo.desc;
     document.getElementById("editDueDate").value = targetTodo.due;
@@ -84,7 +76,6 @@ function editDialogOpener(indexOfTarget) {
 
 todoContainer.addEventListener('click', (event) => {
     event.stopPropagation()
-    // event.preventDefault()
     if (!event.target.classList.contains("editInitiateBtn")) { return }
     let index = indexFinder(event.target.dataset.title)
     editDialogOpener(index)
@@ -100,14 +91,12 @@ navInbox.addEventListener('click', () => {
 
 addButton.addEventListener('click', () => {
     todoConstructDialog.showModal()
-
 })
 
 navContainer.addEventListener('click', (event) => {
     event.stopPropagation();
     if (event.target.classList.contains("inbox")) { return }
     const projName = event.target.dataset.name + ""
-    // console.log(projName)
     target = projName
     Header.innerText = projName
     renderList(todoListDOM)
@@ -122,8 +111,6 @@ projectSubmit.addEventListener('click', (e) => {
 projectCancel.addEventListener('click', () => {
     todoConstructDialog.close()
 })
-
-renderProjects()
 
 addProjectButton.addEventListener('click', () => {
     projectDialog.showModal()
@@ -143,12 +130,9 @@ function closeDialog() {
 todoContainer.addEventListener('click', (event) => {
     event.stopPropagation();
     if (!event.target.classList.contains("expand")) { return }
-    // console.log(event.target.dataset.uuid)
     expandTodo(event.target.dataset.title);
-
     todoDialog.showModal();
     let closeExpandedDialog = document.querySelector('.close-dialog-btn');
-    //const clone = closeExpandedDialog.cloneNode(true);
     closeExpandedDialog.addEventListener('click', closeDialog)
     closeExpandedDialog.addEventListener('click', closeDialog) // work on this guy, he ain't needed
 })
@@ -159,15 +143,3 @@ todoContainer.addEventListener('click', (event) => {
     removeTodo(event.target.dataset.title)
     renderList(todoListDOM)
 })
-
-
-/* const dateTest = new Date("2026-03-05")
-console.log(dateTest)
-const date2 = new Date()
-console.log(date2)
-console.log(isAfter(dateTest, date2))
-
-const parsetest = parseISO("2026-03-05")
-console.log(parsetest)
-const parseCurrent = parseISO("");
-console.log(parseCurrent) */

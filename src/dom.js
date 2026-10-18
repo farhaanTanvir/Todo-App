@@ -1,10 +1,10 @@
+//dom.js
 import { target, navContainer, todoDialog } from "./index.js"
-export const todoListDOM = document.querySelector('.todos') // takes '.todo-item'
-export const Header = document.querySelector('h1')
 import { getProjListCopy } from "./projects.js"
 import { parseISO, format } from "date-fns"
 
-const expanded = document.querySelector('.expand')
+export const todoListDOM = document.querySelector('.todos') // takes '.todo-item'
+export const Header = document.querySelector('h1')
 
 function findProject() {
   return getProjListCopy().find(todo => todo.name === target)
@@ -31,14 +31,9 @@ export function renderList(display) {
   })
 }
 
-
-
-// Target: creating todos dynamically. 
-
 export function renderProjects() {
   navContainer.innerHTML = ""
   getProjListCopy().reverse().forEach((item) => {
-
     if (item.name === "Inbox") {
       return
     } else {
@@ -48,7 +43,7 @@ export function renderProjects() {
 }
 
 export function expandTodo(targetUUID) {
-  let targetProject = findProject() // turn this into a function
+  let targetProject = findProject()
   let targetTodo = targetProject.list.find(todo => todo.title === targetUUID)
   todoDialog.innerHTML = ""
   todoDialog.insertAdjacentHTML('beforeend', `

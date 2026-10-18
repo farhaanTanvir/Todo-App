@@ -1,3 +1,4 @@
+// projects.js
 import { renderList, todoListDOM } from './dom.js'
 import { listItem } from './list.js'
 import { target, todoConstructDialog, editDialog } from './index.js'
@@ -18,6 +19,10 @@ function warnEmptyInputFields() {
 
 function warnPastDate() {
     alert("Due date cannot be in the past!")
+}
+
+function warnDuplicateName() {
+    alert("You cannot make Two todos of the same name!");
 }
 
 export function addTodo() {
@@ -44,35 +49,24 @@ export function addTodo() {
         return
     }
 
-    // let foundCopy = false
     const test = getProjListCopy()
     for (const project of test) {
         for (const todo of project.list) {
             if (todo.title === title.value) {
-                alert("You cannot make Two todos of the same name!");
-
-                // foundCopy = true
+                warnDuplicateName()
                 return
             }
         }
     }
-    // if (foundCopy === false) { todoConstructDialog.close(); }
-    targetProject.addToProject(new listItem(title.value, desc.value, duedate.value, priority.value, notes.value, target))
+    targetProject.list.push(new listItem(title.value, desc.value, duedate.value, priority.value, notes.value, target))
     todoConstructDialog.close()
     renderList(todoListDOM);
 }
 
-export class project {
+class project {
     constructor(name) {
         this.name = name
         this.list = []
-    }
-    getProject() {
-        return structuredClone(this)
-    } // this is useless, get rid of this
-
-    addToProject(item) {
-        this.list.push(item)
     }
 }
 
@@ -83,7 +77,6 @@ export function makeProject(name) {
 export function removeTodo(title) {
     let targetProject = getProjectNoCopy()
     let targetTodoIndex = targetProject.list.findIndex((item) => { return item.title === title })
-    // console.log(targetTodoIndex)
     targetProject.list.splice(targetTodoIndex, 1)
 }
 
@@ -116,9 +109,7 @@ export function editTodo(index) {
     for (const project of test) {
         for (const todo of project.list) {
             if (todo.title === editTitle) {
-                alert("You cannot make Two todos of the same name!");
-
-                // foundCopy = true
+                warnDuplicateName()
                 return
             }
         }
