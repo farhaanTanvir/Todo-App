@@ -36,8 +36,16 @@ renderProjects()
 
 // finishing work:
 
-// go through your OOP principles, one principle at a time, through every file
+// Single Responsibility check
+// dependency inversion check
+// interface segregation check
+
+
+
 // ask chatbots if any of the methods here would have been better suited as a class's method (just for the sake of practising preserving classes. app works fine either way)
+
+// AND ask if you even NEED to move things to objects here in the first place, ask if that would make anything better.
+
 // above step is that, Liskov substitution and Interface segregation largely are irreleveant, and that feels a little wrong idk. 
 
 let targetIndexForEdit = null
