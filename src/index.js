@@ -36,9 +36,9 @@ renderProjects()
 
 // finishing work:
 
-// fix that duplicate event listener bug down below
 // go through your OOP principles, one principle at a time, through every file
-
+// ask chatbots if any of the methods here would have been better suited as a class's method (just for the sake of practising preserving classes. app works fine either way)
+// above step is that, Liskov substitution and Interface segregation largely are irreleveant, and that feels a little wrong idk. 
 
 let targetIndexForEdit = null
 
@@ -134,7 +134,6 @@ todoContainer.addEventListener('click', (event) => {
     todoDialog.showModal();
     let closeExpandedDialog = document.querySelector('.close-dialog-btn');
     closeExpandedDialog.addEventListener('click', closeDialog)
-    closeExpandedDialog.addEventListener('click', closeDialog) // work on this guy, he ain't needed
 })
 
 todoContainer.addEventListener('click', (event) => {
