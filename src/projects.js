@@ -7,6 +7,17 @@ import { target } from "./target.js"
 
 let listOfProjects = [];
 
+class project {
+    constructor(name) {
+        this.name = name
+        this.list = []
+    }
+}
+
+export function makeProject(name) {
+    listOfProjects.push(new project(name))
+}
+
 export function getProjListCopy() {
     return structuredClone(listOfProjects)
 }
@@ -23,83 +34,71 @@ function warnPastDate() {
     alert("Due date cannot be in the past!")
 }
 
-function warnDuplicateName() {
-    alert("You cannot make Two todos of the same name!");
+function grabDOMElements(editOrNah) {
+    if (editOrNah === "noedit") {
+        const title = document.querySelector('#title')
+        const desc = document.querySelector('#description')
+        const duedate = document.querySelector('#dueDate')
+        const priority = document.querySelector('#priority')
+        const notes = document.querySelector('#notes')
+        return { title, desc, duedate, priority, notes }
+    } else if (editOrNah === "edit") {
+        const title = document.getElementById("editTitle");
+        const desc = document.getElementById("editDescription");
+        const duedate = document.getElementById("editDueDate");
+        const priority = document.getElementById("editPriority");
+        const notes = document.getElementById("editNotes");
+        return { title, desc, duedate, priority, notes }
+    } else { console.log("You fucked up, stupid shit") }
+
 }
+
+function valEmptyInputs(inputObj) {
+    if (inputObj.title.value === "") {
+        warnEmptyInputFields()
+        return false
+    } else if (inputObj.desc.value === "") {
+        warnEmptyInputFields()
+        return false
+    } else if (!inputObj.duedate.value) {
+        warnEmptyInputFields()
+        return false
+    }
+
+    if (isPast(parseISO(inputObj.duedate.value))) {
+        warnPastDate()
+        return false
+    }
+
+    return true
+}
+
+// only a little bit left of removing them
 
 export function addTodo() {
     let targetProject = getProjectNoCopy()
-    const title = document.querySelector('#title')
-    const desc = document.querySelector('#description')
-    const duedate = document.querySelector('#dueDate')
-    const priority = document.querySelector('#priority')
-    const notes = document.querySelector('#notes')
+    const DOM = grabDOMElements("noedit")
 
-    if (title.value === "") {
-        warnEmptyInputFields()
-        return
-    } else if (desc.value === "") {
-        warnEmptyInputFields()
-        return
-    } else if (duedate.value === "") {
-        warnEmptyInputFields()
-        return
-    }
-
-    if (isPast(parseISO(duedate.value))) {
-        warnPastDate()
-        return
-    }
-
-    targetProject.list.push(new listItem(title.value, desc.value, duedate.value, priority.value, notes.value))
+    if (!valEmptyInputs(DOM)) { return }
+    console.log(DOM.duedate.value)
+    targetProject.list.push(new listItem(DOM.title.value, DOM.desc.value, DOM.duedate.value, DOM.priority.value, DOM.notes.value))
     todoConstructDialog.close()
     renderList(todoListDOM);
 }
 
-class project {
-    constructor(name) {
-        this.name = name
-        this.list = []
-    }
-}
+export function editTodo(index) {
+    let project = getProjectNoCopy();
+    const DOM = grabDOMElements("edit")
+    if (!valEmptyInputs(DOM)) { return }
 
-export function makeProject(name) {
-    listOfProjects.push(new project(name))
+    editDialog.close()
+    project.list.splice(index, 1, new listItem(DOM.title.value, DOM.desc.value, DOM.duedate.value, DOM.priority.value, DOM.notes.value))
+    renderList(todoListDOM)
 }
 
 export function removeTodo(id) {
     let targetProject = getProjectNoCopy()
     let targetTodoIndex = targetProject.list.findIndex((item) => { return item.id === id })
     targetProject.list.splice(targetTodoIndex, 1)
-}
-
-export function editTodo(index) {
-    let project = getProjectNoCopy();
-    const editTitle = document.getElementById("editTitle").value;
-    const editDescription = document.getElementById("editDescription").value;
-    const editDueDate = document.getElementById("editDueDate").value;
-    const editPriority = document.getElementById("editPriority").value;
-    const editNotes = document.getElementById("editNotes").value;
-
-    const test = getProjListCopy()
-
-    if (editTitle === "") {
-        warnEmptyInputFields()
-        return
-    } else if (editDescription === "") {
-        warnEmptyInputFields()
-        return
-    } else if (editDueDate === "") {
-        warnEmptyInputFields()
-        return
-    }
-
-    if (isPast(parseISO(editDueDate))) {
-        warnPastDate()
-        return
-    }
-
-    editDialog.close()
-    project.list.splice(index, 1, new listItem(editTitle, editDescription, editDueDate, editPriority, editNotes))
     renderList(todoListDOM)
 }

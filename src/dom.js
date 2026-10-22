@@ -12,6 +12,7 @@ function findProject() {
 }
 
 function formatDate(dateStr) {
+  if (!dateStr) { return }
   const date = parseISO(dateStr);
   return format(date, 'MMMM d, yyyy');
 }

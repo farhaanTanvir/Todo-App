@@ -45,19 +45,17 @@ renderProjects()
 
 // when rendering DOM, use something other than insertAdjacentHTML since it's taking user input
 
-// for the click listeners below, consolidate all 3 event listeners into one. Make things into functions that 3 different conditions call
-
 // heard IDs are getting duplicated on every todo. So fix that
 
 // add, remove, and replace a todo, goes on prototype
 
 // add a name check to PROJECT creation aswell
 
-// make removeTodo do rendering by itself
-
 // make duplicate validations into function calls to stop it being repetetive
 
 // Find the current project” is written three times (getProjectNoCopy, findProject, targetProjectFinder) -- says claude. check it. 
+
+// clear remaining event listeners
 
 
 
@@ -142,37 +140,27 @@ function closeDialog() {
     todoDialog.close();
 }
 
-
 function expandListener() {
-
-}
-
-function editListener() {
-
-}
-
-function deleteListener() { }
-
-todoContainer.addEventListener('click', (event) => {
-    event.stopPropagation()
-    if (!event.target.classList.contains("editInitiateBtn")) { return }
-    let index = indexFinder(event.target.dataset.id)
-    editDialogOpener(index)
-    targetIndexForEdit = index
-})
-
-todoContainer.addEventListener('click', (event) => {
-    event.stopPropagation();
-    if (!event.target.classList.contains("expand")) { return }
     expandTodo(event.target.dataset.id);
     todoDialog.showModal();
     let closeExpandedDialog = document.querySelector('.close-dialog-btn');
     closeExpandedDialog.addEventListener('click', closeDialog)
-})
+}
+
+function editListener() {
+    let index = indexFinder(event.target.dataset.id)
+    editDialogOpener(index)
+    targetIndexForEdit = index
+}
+
+function removeListener() {
+    removeTodo(event.target.dataset.id)
+}
 
 todoContainer.addEventListener('click', (event) => {
-    event.stopPropagation();
-    if (!event.target.classList.contains("delete")) { return }
-    removeTodo(event.target.dataset.id)
-    renderList(todoListDOM)
+    event.stopPropagation()
+    if (event.target.classList.contains("editInitiateBtn")) { editListener() }
+    if (event.target.classList.contains("expand")) { expandListener() }
+    if (event.target.classList.contains("delete")) { removeListener() }
 })
+
