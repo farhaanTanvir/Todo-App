@@ -30,7 +30,6 @@ renderProjects()
 
 // WHATS LEFT
 
-// the "Today" tab (OPTIONAL)
 // something to mark a todo complete (OPTIONAL)
 // clear input boxes after every todo creation (LAST THING TO DO)
 
@@ -41,7 +40,6 @@ renderProjects()
 // listjs has nothing
 
 
-// move target to its own module. It ain't good here
 
 // addTodo and editTodo are doing too much, you have to split everything
 
@@ -53,7 +51,20 @@ renderProjects()
 
 // heard IDs are getting duplicated on every todo. So fix that
 
+// add, remove, and replace a todo, goes on prototype
 
+// add a name check to PROJECT creation aswell
+
+// make removeTodo do rendering by itself
+
+// make duplicate validations into function calls to stop it being repetetive
+
+// Find the current project” is written three times (getProjectNoCopy, findProject, targetProjectFinder) -- says claude. check it. 
+
+
+
+// SOME more problems (optional):
+// whitespace inputs taken in creating and editing todos
 
 
 // finishing work:

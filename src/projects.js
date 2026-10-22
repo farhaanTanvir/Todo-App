@@ -12,7 +12,7 @@ export function getProjListCopy() {
 }
 
 function getProjectNoCopy() {
-    return listOfProjects.find(todo => todo.name === target);
+    return listOfProjects.find(project => project.name === target);
 }
 
 function warnEmptyInputFields() {
