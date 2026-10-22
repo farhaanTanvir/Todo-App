@@ -27,7 +27,7 @@ export function renderList(display) {
         <p class="title ${item.priority}">${item.title}</p>
         <p class="due">${formatDate(item.due)}</p>
         </div>
-        <div class="buttons-cont"><button id="expand" class="expand" data-title="${item.title}">Expand</button><button id="delete" class="delete" data-title="${item.title}">Delete</button><button id="editInitiateBtn" class="editInitiateBtn" data-title="${item.title}">Edit</button></div>
+        <div class="buttons-cont"><button id="expand" class="expand" data-id="${item.id}">Expand</button><button id="delete" class="delete" data-id="${item.id}">Delete</button><button id="editInitiateBtn" class="editInitiateBtn" data-id="${item.id}">Edit</button></div>
       </div>`)
   })
 }
@@ -45,7 +45,7 @@ export function renderProjects() {
 
 export function expandTodo(targetUUID) {
   let targetProject = findProject()
-  let targetTodo = targetProject.list.find(todo => todo.title === targetUUID)
+  let targetTodo = targetProject.list.find(todo => todo.id === targetUUID)
   todoDialog.innerHTML = ""
   todoDialog.insertAdjacentHTML('beforeend', `
 <div class="expanded-todo">

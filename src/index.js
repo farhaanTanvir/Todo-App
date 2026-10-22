@@ -43,8 +43,6 @@ renderProjects()
 
 // addTodo and editTodo are doing too much, you have to split everything
 
-// stop using title as identity. use uuid.
-
 // when rendering DOM, use something other than insertAdjacentHTML since it's taking user input
 
 // for the click listeners below, consolidate all 3 event listeners into one. Make things into functions that 3 different conditions call
@@ -96,9 +94,9 @@ function targetProjectFinder() {
     return targetProject
 }
 
-function indexFinder(title) {
+function indexFinder(id) {
     let targetProject = targetProjectFinder()
-    return targetProject.list.findIndex((target) => { return target.title === title })
+    return targetProject.list.findIndex((target) => { return target.id === id })
 }
 
 function editDialogOpener(indexOfTarget) {
@@ -114,13 +112,6 @@ function editDialogOpener(indexOfTarget) {
     editDialog.showModal()
 }
 
-todoContainer.addEventListener('click', (event) => {
-    event.stopPropagation()
-    if (!event.target.classList.contains("editInitiateBtn")) { return }
-    let index = indexFinder(event.target.dataset.title)
-    editDialogOpener(index)
-    targetIndexForEdit = index
-})
 
 
 
@@ -151,10 +142,29 @@ function closeDialog() {
     todoDialog.close();
 }
 
+
+function expandListener() {
+
+}
+
+function editListener() {
+
+}
+
+function deleteListener() { }
+
+todoContainer.addEventListener('click', (event) => {
+    event.stopPropagation()
+    if (!event.target.classList.contains("editInitiateBtn")) { return }
+    let index = indexFinder(event.target.dataset.id)
+    editDialogOpener(index)
+    targetIndexForEdit = index
+})
+
 todoContainer.addEventListener('click', (event) => {
     event.stopPropagation();
     if (!event.target.classList.contains("expand")) { return }
-    expandTodo(event.target.dataset.title);
+    expandTodo(event.target.dataset.id);
     todoDialog.showModal();
     let closeExpandedDialog = document.querySelector('.close-dialog-btn');
     closeExpandedDialog.addEventListener('click', closeDialog)
@@ -163,6 +173,6 @@ todoContainer.addEventListener('click', (event) => {
 todoContainer.addEventListener('click', (event) => {
     event.stopPropagation();
     if (!event.target.classList.contains("delete")) { return }
-    removeTodo(event.target.dataset.title)
+    removeTodo(event.target.dataset.id)
     renderList(todoListDOM)
 })

@@ -51,16 +51,7 @@ export function addTodo() {
         return
     }
 
-    const test = getProjListCopy()
-    for (const project of test) {
-        for (const todo of project.list) {
-            if (todo.title === title.value) {
-                warnDuplicateName()
-                return
-            }
-        }
-    }
-    targetProject.list.push(new listItem(title.value, desc.value, duedate.value, priority.value, notes.value, target))
+    targetProject.list.push(new listItem(title.value, desc.value, duedate.value, priority.value, notes.value))
     todoConstructDialog.close()
     renderList(todoListDOM);
 }
@@ -76,9 +67,9 @@ export function makeProject(name) {
     listOfProjects.push(new project(name))
 }
 
-export function removeTodo(title) {
+export function removeTodo(id) {
     let targetProject = getProjectNoCopy()
-    let targetTodoIndex = targetProject.list.findIndex((item) => { return item.title === title })
+    let targetTodoIndex = targetProject.list.findIndex((item) => { return item.id === id })
     targetProject.list.splice(targetTodoIndex, 1)
 }
 
@@ -108,14 +99,6 @@ export function editTodo(index) {
         return
     }
 
-    for (const project of test) {
-        for (const todo of project.list) {
-            if (todo.title === editTitle) {
-                warnDuplicateName()
-                return
-            }
-        }
-    }
     editDialog.close()
     project.list.splice(index, 1, new listItem(editTitle, editDescription, editDueDate, editPriority, editNotes))
     renderList(todoListDOM)
