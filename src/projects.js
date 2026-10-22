@@ -1,8 +1,10 @@
 // projects.js
 import { renderList, todoListDOM } from './dom.js'
 import { listItem } from './list.js'
-import { target, todoConstructDialog, editDialog } from './index.js'
+import { todoConstructDialog, editDialog } from './index.js' //might need to check if this can be skipped
 import { parseISO, isPast } from "date-fns"
+import { target } from "./target.js"
+
 let listOfProjects = [];
 
 export function getProjListCopy() {

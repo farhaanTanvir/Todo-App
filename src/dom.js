@@ -1,7 +1,8 @@
 //dom.js
-import { target, navContainer, todoDialog } from "./index.js"
+import { todoDialog } from "./index.js"
 import { getProjListCopy } from "./projects.js"
 import { parseISO, format } from "date-fns"
+import { navContainer, target } from "./target.js"
 
 export const todoListDOM = document.querySelector('.todos') // takes '.todo-item'
 export const Header = document.querySelector('h1')
@@ -37,7 +38,7 @@ export function renderProjects() {
     if (item.name === "Inbox") {
       return
     } else {
-      navContainer.insertAdjacentHTML("beforeend", `<div class="nav-item project-item" data-name="${item.name}">${item.name}</div>`)
+      navContainer.insertAdjacentHTML("beforeend", `<div class="nav-item project-item proj" data-name="${item.name}">${item.name}</div>`)
     }
   })
 }

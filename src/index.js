@@ -1,19 +1,20 @@
 // index.js
 import "./style.css";
 import { makeProject, addTodo, removeTodo, editTodo, getProjListCopy } from "./projects.js"
-import { renderList, todoListDOM, renderProjects, Header, expandTodo } from "./dom.js"
+import { renderList, todoListDOM, renderProjects, expandTodo } from "./dom.js"
+import { target } from "./target.js"
 
 export const todoDialog = document.querySelector('#todo-dialog')
 document.body.append(todoDialog)
 
-export let target = "Inbox"; // this indicates the project you're inside. You upload the title property here. 
+
 
 const addButton = document.querySelector('.add')
 export const todoConstructDialog = document.querySelector('#todo-constructor')
 const projectSubmit = document.querySelector('#projectConstructorSubmit')
 const projectCancel = document.querySelector('#addPanelCancel')
-const navInbox = document.querySelector('#inbox-nav')
-export const navContainer = document.querySelector('#project-cont')
+
+
 const addProjectButton = document.querySelector('#addProject')
 const projectDialog = document.querySelector('#projectNameCont')
 const submitToMakeProject = document.querySelector('#makeProjectSubmit')
@@ -33,12 +34,32 @@ renderProjects()
 // something to mark a todo complete (OPTIONAL)
 // clear input boxes after every todo creation (LAST THING TO DO)
 
+// separate DOM fetching from validation or todo creation. The Todo creation logic should be able to work WITHOUT A BROWSER, that's the test. check:
+// index.js
+// dom.js
+// project.js
+// listjs has nothing
+
+
+// move target to its own module. It ain't good here
+
+// addTodo and editTodo are doing too much, you have to split everything
+
+// stop using title as identity. use uuid.
+
+// when rendering DOM, use something other than insertAdjacentHTML since it's taking user input
+
+// for the click listeners below, consolidate all 3 event listeners into one. Make things into functions that 3 different conditions call
+
+// heard IDs are getting duplicated on every todo. So fix that
+
+
+
 
 // finishing work:
 
 // Single Responsibility check
 // dependency inversion check
-// interface segregation check
 
 
 
@@ -90,25 +111,10 @@ todoContainer.addEventListener('click', (event) => {
     targetIndexForEdit = index
 })
 
-navInbox.addEventListener('click', () => {
-    target = "Inbox"
-    console.log("switched to Inbox project")
-    renderList(todoListDOM);
-    return target
-})
+
 
 addButton.addEventListener('click', () => {
     todoConstructDialog.showModal()
-})
-
-navContainer.addEventListener('click', (event) => {
-    event.stopPropagation();
-    if (event.target.classList.contains("inbox")) { return }
-    const projName = event.target.dataset.name + ""
-    target = projName
-    Header.innerText = projName
-    renderList(todoListDOM)
-    return target
 })
 
 projectSubmit.addEventListener('click', (e) => {
@@ -129,7 +135,6 @@ submitToMakeProject.addEventListener('click', () => {
     makeProject(title.value)
     renderProjects()
 })
-
 
 function closeDialog() {
     todoDialog.close();
