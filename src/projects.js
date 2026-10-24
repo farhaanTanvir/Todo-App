@@ -12,10 +12,22 @@ class project {
         this.name = name
         this.list = []
     }
+
+    add(title, desc, duedate, priority, notes) {
+        this.list.push(new listItem(title, desc, duedate, priority, notes));
+    }
+
+    edit(index, title, desc, duedate, priority, notes) {
+        this.list.splice(index, 1, new listItem(title, desc, duedate, priority, notes))
+    }
+    remove(index) {
+        this.list.splice(index, 1)
+    }
 }
 
 export function makeProject(name) {
     listOfProjects.push(new project(name))
+
 }
 
 export function getProjListCopy() {
@@ -49,23 +61,22 @@ function grabDOMElements(editOrNah) {
         const priority = document.getElementById("editPriority");
         const notes = document.getElementById("editNotes");
         return { title, desc, duedate, priority, notes }
-    } else { console.log("You fucked up, stupid shit") }
-
+    }
 }
 
 function valEmptyInputs(inputObj) {
-    if (inputObj.title.value === "") {
+    if (inputObj.title === "") {
         warnEmptyInputFields()
         return false
-    } else if (inputObj.desc.value === "") {
+    } else if (inputObj.desc === "") {
         warnEmptyInputFields()
         return false
-    } else if (!inputObj.duedate.value) {
+    } else if (!inputObj.duedate) {
         warnEmptyInputFields()
         return false
     }
 
-    if (isPast(parseISO(inputObj.duedate.value))) {
+    if (isPast(parseISO(inputObj.duedate))) {
         warnPastDate()
         return false
     }
@@ -73,32 +84,31 @@ function valEmptyInputs(inputObj) {
     return true
 }
 
-// only a little bit left of removing them
+function closeDialog(dialog) {
+    dialog.close()
+}
 
 export function addTodo() {
     let targetProject = getProjectNoCopy()
     const DOM = grabDOMElements("noedit")
-
-    if (!valEmptyInputs(DOM)) { return }
-    console.log(DOM.duedate.value)
-    targetProject.list.push(new listItem(DOM.title.value, DOM.desc.value, DOM.duedate.value, DOM.priority.value, DOM.notes.value))
-    todoConstructDialog.close()
+    if (!valEmptyInputs({ title: DOM.title.value, desc: DOM.desc.value, duedate: DOM.duedate.value, priority: DOM.priority.value, notes: DOM.notes.value })) { return }
+    targetProject.add(DOM.title.value, DOM.desc.value, DOM.duedate.value, DOM.priority.value, DOM.notes.value)
+    closeDialog(todoConstructDialog)
     renderList(todoListDOM);
 }
 
 export function editTodo(index) {
     let project = getProjectNoCopy();
     const DOM = grabDOMElements("edit")
-    if (!valEmptyInputs(DOM)) { return }
-
-    editDialog.close()
-    project.list.splice(index, 1, new listItem(DOM.title.value, DOM.desc.value, DOM.duedate.value, DOM.priority.value, DOM.notes.value))
+    if (!valEmptyInputs({ title: DOM.title.value, desc: DOM.desc.value, duedate: DOM.duedate.value, priority: DOM.priority.value, notes: DOM.notes.value })) { return }
+    closeDialog(editDialog)
+    project.edit(index, DOM.title.value, DOM.desc.value, DOM.duedate.value, DOM.priority.value, DOM.notes.value)
     renderList(todoListDOM)
 }
 
 export function removeTodo(id) {
     let targetProject = getProjectNoCopy()
     let targetTodoIndex = targetProject.list.findIndex((item) => { return item.id === id })
-    targetProject.list.splice(targetTodoIndex, 1)
+    targetProject.remove(targetTodoIndex)
     renderList(todoListDOM)
 }

@@ -40,8 +40,7 @@ renderProjects()
 // listjs has nothing
 
 
-
-// addTodo and editTodo are doing too much, you have to split everything
+// make renderList take no parameters
 
 // when rendering DOM, use something other than insertAdjacentHTML since it's taking user input
 
