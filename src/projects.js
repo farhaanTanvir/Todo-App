@@ -1,5 +1,5 @@
 // projects.js
-import { renderList, todoListDOM } from './dom.js'
+import { renderList } from './dom.js'
 import { listItem } from './list.js'
 import { todoConstructDialog, editDialog } from './index.js' //might need to check if this can be skipped
 import { parseISO, isPast } from "date-fns"
@@ -7,7 +7,7 @@ import { target } from "./target.js"
 
 let listOfProjects = [];
 
-class project {
+class Project {
     constructor(name) {
         this.name = name
         this.list = []
@@ -25,10 +25,7 @@ class project {
     }
 }
 
-export function makeProject(name) {
-    listOfProjects.push(new project(name))
 
-}
 
 export function getProjListCopy() {
     return structuredClone(listOfProjects)
@@ -36,6 +33,23 @@ export function getProjListCopy() {
 
 function getProjectNoCopy() {
     return listOfProjects.find(project => project.name === target);
+}
+
+function projDoubleNameCheck(name) {
+    const test = getProjListCopy();
+    let result = true
+    test.forEach((project) => { if (project.name === name) { result = false } })
+    return result
+}
+
+function warnDuplicateProjName() {
+    alert("You can't make two projects of the same name")
+}
+
+export function makeProject(name) {
+    if (!projDoubleNameCheck(name)) { warnDuplicateProjName(); return false }
+    listOfProjects.push(new Project(name))
+    return true
 }
 
 function warnEmptyInputFields() {
@@ -94,7 +108,7 @@ export function addTodo() {
     if (!valEmptyInputs({ title: DOM.title.value, desc: DOM.desc.value, duedate: DOM.duedate.value, priority: DOM.priority.value, notes: DOM.notes.value })) { return }
     targetProject.add(DOM.title.value, DOM.desc.value, DOM.duedate.value, DOM.priority.value, DOM.notes.value)
     closeDialog(todoConstructDialog)
-    renderList(todoListDOM);
+    renderList();
 }
 
 export function editTodo(index) {
@@ -103,12 +117,12 @@ export function editTodo(index) {
     if (!valEmptyInputs({ title: DOM.title.value, desc: DOM.desc.value, duedate: DOM.duedate.value, priority: DOM.priority.value, notes: DOM.notes.value })) { return }
     closeDialog(editDialog)
     project.edit(index, DOM.title.value, DOM.desc.value, DOM.duedate.value, DOM.priority.value, DOM.notes.value)
-    renderList(todoListDOM)
+    renderList()
 }
 
 export function removeTodo(id) {
     let targetProject = getProjectNoCopy()
     let targetTodoIndex = targetProject.list.findIndex((item) => { return item.id === id })
     targetProject.remove(targetTodoIndex)
-    renderList(todoListDOM)
+    renderList()
 }

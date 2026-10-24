@@ -7,7 +7,7 @@ import { navContainer, target } from "./target.js"
 export const todoListDOM = document.querySelector('.todos') // takes '.todo-item'
 export const Header = document.querySelector('h1')
 
-function findProject() {
+export function findProject() {
   return getProjListCopy().find(todo => todo.name === target)
 }
 
@@ -17,18 +17,18 @@ function formatDate(dateStr) {
   return format(date, 'MMMM d, yyyy');
 }
 
-export function renderList(display) {
+export function renderList() {
   let projectObject = findProject()
   Header.innerText = projectObject.name
-  display.innerHTML = ""
+  todoListDOM.innerHTML = ""
   projectObject.list.reverse()
   projectObject.list.forEach((item) => {
-    display.insertAdjacentHTML("beforeend", `<div class="todo-item">
+    todoListDOM.insertAdjacentHTML("beforeend", `<div class="todo-item">
       <div>
         <p class="title ${item.priority}">${item.title}</p>
         <p class="due">${formatDate(item.due)}</p>
         </div>
-        <div class="buttons-cont"><button id="expand" class="expand" data-id="${item.id}">Expand</button><button id="delete" class="delete" data-id="${item.id}">Delete</button><button id="editInitiateBtn" class="editInitiateBtn" data-id="${item.id}">Edit</button></div>
+        <div class="buttons-cont"><button class="expand" data-id="${item.id}">Expand</button><button class="delete" data-id="${item.id}">Delete</button><button class="editInitiateBtn" data-id="${item.id}">Edit</button></div>
       </div>`)
   })
 }
