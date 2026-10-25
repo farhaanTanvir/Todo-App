@@ -21,7 +21,6 @@ class Project {
     }
 }
 
-
 export function getProjListCopy() {
     return structuredClone(listOfProjects)
 }
@@ -38,76 +37,66 @@ function projDoubleNameCheck(name) {
 }
 
 function warnDuplicateProjName() {
-    alert("You can't make two projects of the same name")
+    duplicateName()
+}
+
+function valProjDupeName(name) {
+    if (!projDoubleNameCheck(name)) { warnDuplicateProjName(); return false }
+    return true
 }
 
 export function makeProject(name) {
-    if (!projDoubleNameCheck(name)) { warnDuplicateProjName(); return false }
+    if (!valProjDupeName(name)) { return false }
     listOfProjects.push(new Project(name))
     return true
 }
 
-function warnEmptyInputFields() {
-    alert("You have not filled out every input required")
+export let warnState = null
+
+function EmptyInputFields() {
+    warnState = "You have not filled out every input required"
 }
 
-function warnPastDate() {
-    alert("Due date cannot be in the past!")
+function PastDate() {
+    warnState = "Due date cannot be in the past!"
 }
 
-function grabDOMElements(editOrNah) {
-    if (editOrNah === "noedit") {
-        const title = document.querySelector('#title')
-        const desc = document.querySelector('#description')
-        const duedate = document.querySelector('#dueDate')
-        const priority = document.querySelector('#priority')
-        const notes = document.querySelector('#notes')
-        return { title, desc, duedate, priority, notes }
-    } else if (editOrNah === "edit") {
-        const title = document.getElementById("editTitle");
-        const desc = document.getElementById("editDescription");
-        const duedate = document.getElementById("editDueDate");
-        const priority = document.getElementById("editPriority");
-        const notes = document.getElementById("editNotes");
-        return { title, desc, duedate, priority, notes }
-    }
+function duplicateName() {
+    warnState = "You can't make two projects of the same name"
 }
 
 function valEmptyInputs(inputObj) {
     if (inputObj.title === "") {
-        warnEmptyInputFields()
+        EmptyInputFields()
         return false
     } else if (inputObj.desc === "") {
-        warnEmptyInputFields()
+        EmptyInputFields()
         return false
     } else if (!inputObj.duedate) {
-        warnEmptyInputFields()
+        EmptyInputFields()
         return false
     }
 
     if (isPast(parseISO(inputObj.duedate))) {
-        warnPastDate()
+        PastDate()
         return false
     }
-
     return true
 }
 
-
-
-export function addTodo(state) {
+export function addTodo(state, DOMGrabber) {
     let targetProject = getProjectNoCopy(state)
-    const DOM = grabDOMElements("noedit")
-    if (!valEmptyInputs({ title: DOM.title.value, desc: DOM.desc.value, duedate: DOM.duedate.value, priority: DOM.priority.value, notes: DOM.notes.value })) { return false }
-    targetProject.add(DOM.title.value, DOM.desc.value, DOM.duedate.value, DOM.priority.value, DOM.notes.value)
+    const DOM = DOMGrabber
+    if (!valEmptyInputs({ title: DOM.title, desc: DOM.desc, duedate: DOM.duedate, priority: DOM.priority, notes: DOM.notes })) { return false }
+    targetProject.add(DOM.title, DOM.desc, DOM.duedate, DOM.priority, DOM.notes)
     return true
 }
 
-export function editTodo(index, state) {
+export function editTodo(index, state, DOMGrabber) {
     let project = getProjectNoCopy(state);
-    const DOM = grabDOMElements("edit")
-    if (!valEmptyInputs({ title: DOM.title.value, desc: DOM.desc.value, duedate: DOM.duedate.value, priority: DOM.priority.value, notes: DOM.notes.value })) { return false }
-    project.edit(index, DOM.title.value, DOM.desc.value, DOM.duedate.value, DOM.priority.value, DOM.notes.value)
+    const DOM = DOMGrabber
+    if (!valEmptyInputs({ title: DOM.title, desc: DOM.desc, duedate: DOM.duedate, priority: DOM.priority, notes: DOM.notes })) { return false }
+    project.edit(index, DOM.title, DOM.desc, DOM.duedate, DOM.priority, DOM.notes)
     return true
 }
 

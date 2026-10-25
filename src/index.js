@@ -1,13 +1,13 @@
 import "./style.css";
-import { makeProject, addTodo, removeTodo, editTodo, getProjListCopy, findProject } from "./projects.js"
-import { renderList, renderProjects, expandTodo } from "./dom.js"
+import { makeProject, addTodo, removeTodo, editTodo, getProjListCopy, findProject, warnState } from "./projects.js"
+import { renderList, renderProjects, expandTodo, grabDOMElements } from "./dom.js"
 import { target } from "./target.js"
 
 const todoDialog = document.querySelector('#todo-dialog')
 document.body.append(todoDialog)
 
 const addButton = document.querySelector('.add')
-export const todoConstructDialog = document.querySelector('#todo-constructor')
+const todoConstructDialog = document.querySelector('#todo-constructor')
 const projectSubmit = document.querySelector('#projectConstructorSubmit')
 const projectCancel = document.querySelector('#addPanelCancel')
 
@@ -15,43 +15,33 @@ const addProjectButton = document.querySelector('#addProject')
 const projectDialog = document.querySelector('#projectNameCont')
 const submitToMakeProject = document.querySelector('#makeProjectSubmit')
 const todoContainer = document.querySelector('.todos')
-export const editDialog = document.querySelector('#editTodo')
+const editDialog = document.querySelector('#editTodo')
 const saveEditBtn = document.getElementById("saveEdit");
 const cancelEditBtn = document.getElementById("cancelEdit");
 
 makeProject("Inbox")
+// console.log(findProject(target))
 renderList(findProject(target));
 renderProjects(getProjListCopy())
 
 
-// WHATS LEFT (optional)
+// WHATS LEFT (optional, for when you'll ship this)
 
 // something to mark a todo complete 
 // clear input boxes after every todo creation (LAST THING TO DO)
 // whitespace inputs taken in creating and editing todos, so need a regex to filter that out in validation
+// when rendering DOM, something other than insertAdjacentHTML is necessary to use since it's taking user input. And this applies EVERYWHERE insertAdjacentHTML is used btw. Just use other inserting methods
 
 
 // SINGLE RESPONSIBILITY CHECK:
-// index.js
 // dom.js
-// project.js
 // listjs 
 // target.js
 
 
-
-// when rendering DOM, use something other than insertAdjacentHTML since it's taking user input
-
-
-
 // finishing work:
 
-// open-closed check
-// interface segregation check
-// liskov substitution
 // dependency inversion check
-
-
 
 
 
@@ -59,7 +49,9 @@ renderProjects(getProjListCopy())
 
 // ask one last time for SOLID principle violations
 
-// prolly should live in project.js?
+function issueWarning() {
+    alert(warnState)
+}
 
 function closeDialog(dialog) {
     dialog.close()
@@ -68,8 +60,8 @@ function closeDialog(dialog) {
 let targetIndexForEdit = null
 
 saveEditBtn.addEventListener('click', () => {
-    if (targetIndexForEdit === null) { console.log("oopsie daisy"); return }
-    if (editTodo(targetIndexForEdit, target)) { closeDialog(editDialog) }
+    if (targetIndexForEdit === null) { return }
+    if (editTodo(targetIndexForEdit, target, grabDOMElements("edit"))) { closeDialog(editDialog) } else { issueWarning() }
     renderList(findProject(target))
 })
 
@@ -82,29 +74,26 @@ function indexFinder(id) {
     return targetProject.list.findIndex((target) => { return target.id === id })
 }
 
-function editDialogOpener(indexOfTarget) {
-    let targetProject = findProject(target)
-    let targetTodo = targetProject.list[indexOfTarget]
-
-    document.getElementById("editTitle").value = targetTodo.title;
-    document.getElementById("editDescription").value = targetTodo.desc;
-    document.getElementById("editDueDate").value = targetTodo.due;
-    document.getElementById("editPriority").value = targetTodo.priority;
-    document.getElementById("editNotes").value = targetTodo.notes;
-
-    editDialog.showModal()
+function assignValueToElements(DOMElements, values) {
+    DOMElements.title.value = values.title
+    DOMElements.desc.value = values.desc
+    DOMElements.due.value = values.due
+    DOMElements.priority.value = values.priority
+    DOMElements.notes.value = values.notes
 }
 
+function editDialogOpener(indexOfTarget, project) {
+    let targetTodo = project.list[indexOfTarget]
+    assignValueToElements({ title: document.getElementById("editTitle"), desc: document.getElementById("editDescription"), due: document.getElementById("editDueDate"), priority: document.getElementById("editPriority"), notes: document.getElementById("editNotes") }, targetTodo)
+}
 
 addButton.addEventListener('click', () => {
     todoConstructDialog.showModal()
 })
 
-
-
 projectSubmit.addEventListener('click', (e) => {
     e.preventDefault()
-    if (addTodo(target)) { closeDialog(todoConstructDialog) }
+    if (addTodo(target, grabDOMElements("noedit"))) { closeDialog(todoConstructDialog) } else { issueWarning() }
     renderList(findProject(target));
 })
 
@@ -119,10 +108,9 @@ addProjectButton.addEventListener('click', () => {
 submitToMakeProject.addEventListener('click', (e) => {
     e.preventDefault()
     const title = document.querySelector('#projectTitle')
-    if (makeProject(title.value)) { projectDialog.close() }
+    if (makeProject(title.value)) { projectDialog.close() } else { issueWarning() }
     renderProjects(getProjListCopy())
 })
-
 
 function expandListener() {
     expandTodo(event.target.dataset.id, findProject(target));
@@ -135,7 +123,8 @@ function expandListener() {
 
 function editListener() {
     let index = indexFinder(event.target.dataset.id)
-    editDialogOpener(index)
+    editDialogOpener(index, findProject(target))
+    editDialog.showModal()
     targetIndexForEdit = index
 }
 

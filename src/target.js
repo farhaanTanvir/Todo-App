@@ -13,7 +13,6 @@ navInbox.addEventListener('click', () => {
     target = "Inbox"
     Header.innerText = target
     renderList(findProject(target));
-    return target
 })
 
 navContainer.addEventListener('click', (event) => {
@@ -24,5 +23,4 @@ navContainer.addEventListener('click', (event) => {
     target = projName
     Header.innerText = target
     renderList(findProject(target))
-    return target
 })
