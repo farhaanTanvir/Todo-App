@@ -1,7 +1,6 @@
-// index.js
 import "./style.css";
-import { makeProject, addTodo, removeTodo, editTodo } from "./projects.js"
-import { renderList, renderProjects, expandTodo, findProject } from "./dom.js"
+import { makeProject, addTodo, removeTodo, editTodo, getProjListCopy, findProject } from "./projects.js"
+import { renderList, renderProjects, expandTodo } from "./dom.js"
 import { target } from "./target.js"
 
 const todoDialog = document.querySelector('#todo-dialog')
@@ -21,8 +20,8 @@ const saveEditBtn = document.getElementById("saveEdit");
 const cancelEditBtn = document.getElementById("cancelEdit");
 
 makeProject("Inbox")
-renderList();
-renderProjects()
+renderList(findProject(target));
+renderProjects(getProjListCopy())
 
 
 // WHATS LEFT (optional)
@@ -45,10 +44,6 @@ renderProjects()
 
 
 
-// ULITMATE MOVE: Make it so that only index imports, and everyone else just exports
-// dom.js
-
-
 // finishing work:
 
 // open-closed check
@@ -64,6 +59,8 @@ renderProjects()
 
 // ask one last time for SOLID principle violations
 
+// prolly should live in project.js?
+
 function closeDialog(dialog) {
     dialog.close()
 }
@@ -73,7 +70,7 @@ let targetIndexForEdit = null
 saveEditBtn.addEventListener('click', () => {
     if (targetIndexForEdit === null) { console.log("oopsie daisy"); return }
     if (editTodo(targetIndexForEdit, target)) { closeDialog(editDialog) }
-    renderList()
+    renderList(findProject(target))
 })
 
 cancelEditBtn.addEventListener('click', () => {
@@ -81,12 +78,12 @@ cancelEditBtn.addEventListener('click', () => {
 })
 
 function indexFinder(id) {
-    let targetProject = findProject()
+    let targetProject = findProject(target)
     return targetProject.list.findIndex((target) => { return target.id === id })
 }
 
 function editDialogOpener(indexOfTarget) {
-    let targetProject = findProject()
+    let targetProject = findProject(target)
     let targetTodo = targetProject.list[indexOfTarget]
 
     document.getElementById("editTitle").value = targetTodo.title;
@@ -108,7 +105,7 @@ addButton.addEventListener('click', () => {
 projectSubmit.addEventListener('click', (e) => {
     e.preventDefault()
     if (addTodo(target)) { closeDialog(todoConstructDialog) }
-    renderList();
+    renderList(findProject(target));
 })
 
 projectCancel.addEventListener('click', () => {
@@ -123,12 +120,12 @@ submitToMakeProject.addEventListener('click', (e) => {
     e.preventDefault()
     const title = document.querySelector('#projectTitle')
     if (makeProject(title.value)) { projectDialog.close() }
-    renderProjects()
+    renderProjects(getProjListCopy())
 })
 
 
 function expandListener() {
-    expandTodo(event.target.dataset.id);
+    expandTodo(event.target.dataset.id, findProject(target));
     todoDialog.showModal();
     let closeExpandedDialog = document.querySelector('.close-dialog-btn');
     closeExpandedDialog.addEventListener('click', () => {
@@ -144,7 +141,7 @@ function editListener() {
 
 function removeListener() {
     removeTodo(event.target.dataset.id, target)
-    renderList()
+    renderList(findProject(target))
 }
 
 todoContainer.addEventListener('click', (event) => {

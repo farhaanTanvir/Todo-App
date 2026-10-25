@@ -22,7 +22,6 @@ class Project {
 }
 
 
-
 export function getProjListCopy() {
     return structuredClone(listOfProjects)
 }
@@ -116,4 +115,8 @@ export function removeTodo(id, state) {
     let targetProject = getProjectNoCopy(state)
     let targetTodoIndex = targetProject.list.findIndex((item) => { return item.id === id })
     targetProject.remove(targetTodoIndex)
+}
+
+export function findProject(target) {
+    return getProjListCopy().find(todo => todo.name === target)
 }

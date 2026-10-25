@@ -1,4 +1,5 @@
 import { renderList } from "./dom.js"
+import { findProject } from "./projects.js"
 
 export let target = "Inbox"; // this indicates the project you're inside. You upload the title property here. 
 
@@ -11,7 +12,7 @@ Header.innerText = target
 navInbox.addEventListener('click', () => {
     target = "Inbox"
     Header.innerText = target
-    renderList();
+    renderList(findProject(target));
     return target
 })
 
@@ -22,6 +23,6 @@ navContainer.addEventListener('click', (event) => {
     const projName = event.target.dataset.name + ""
     target = projName
     Header.innerText = target
-    renderList()
+    renderList(findProject(target))
     return target
 })

@@ -1,15 +1,8 @@
-import { getProjListCopy } from "./projects.js"
 import { parseISO, format } from "date-fns"
-import { target } from "./target.js"
-
-export const todoListDOM = document.querySelector('.todos') // takes '.todo-item' (see if any1 imports this)
+export const todoListDOM = document.querySelector('.todos') // takes '.todo-item' 
 const todoDialog = document.querySelector('#todo-dialog')
-
 const navContainer = document.querySelector('#project-cont')
 
-export function findProject() {
-  return getProjListCopy().find(todo => todo.name === target)
-}
 
 function formatDate(dateStr) {
   if (!dateStr) { return }
@@ -17,8 +10,8 @@ function formatDate(dateStr) {
   return format(date, 'MMMM d, yyyy');
 }
 
-export function renderList() {
-  let projectObject = findProject()
+export function renderList(findProjFunction) {
+  let projectObject = findProjFunction
   todoListDOM.innerHTML = ""
   projectObject.list.reverse()
   projectObject.list.forEach((item) => {
@@ -32,9 +25,9 @@ export function renderList() {
   })
 }
 
-export function renderProjects() {
+export function renderProjects(projListCopy) {
   navContainer.innerHTML = ""
-  getProjListCopy().reverse().forEach((item) => {
+  projListCopy.reverse().forEach((item) => {
     if (item.name === "Inbox") {
       return
     } else {
@@ -43,8 +36,8 @@ export function renderProjects() {
   })
 }
 
-export function expandTodo(targetUUID) {
-  let targetProject = findProject()
+export function expandTodo(targetUUID, findProjFunction) {
+  let targetProject = findProjFunction
   let targetTodo = targetProject.list.find(todo => todo.id === targetUUID)
   todoDialog.innerHTML = ""
   todoDialog.insertAdjacentHTML('beforeend', `
