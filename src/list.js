@@ -1,4 +1,3 @@
-//list.js
 export class listItem {
     constructor(title, description, dueDate, priority, notes) {
         this.title = title

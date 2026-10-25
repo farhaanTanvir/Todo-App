@@ -1,11 +1,11 @@
-//dom.js
-import { todoDialog } from "./index.js"
 import { getProjListCopy } from "./projects.js"
 import { parseISO, format } from "date-fns"
-import { navContainer, target } from "./target.js"
+import { target } from "./target.js"
 
-export const todoListDOM = document.querySelector('.todos') // takes '.todo-item'
-export const Header = document.querySelector('h1')
+export const todoListDOM = document.querySelector('.todos') // takes '.todo-item' (see if any1 imports this)
+const todoDialog = document.querySelector('#todo-dialog')
+
+const navContainer = document.querySelector('#project-cont')
 
 export function findProject() {
   return getProjListCopy().find(todo => todo.name === target)
@@ -19,7 +19,6 @@ function formatDate(dateStr) {
 
 export function renderList() {
   let projectObject = findProject()
-  Header.innerText = projectObject.name
   todoListDOM.innerHTML = ""
   projectObject.list.reverse()
   projectObject.list.forEach((item) => {

@@ -1,9 +1,5 @@
-// projects.js
-import { renderList } from './dom.js'
 import { listItem } from './list.js'
-import { todoConstructDialog, editDialog } from './index.js' //might need to check if this can be skipped
 import { parseISO, isPast } from "date-fns"
-import { target } from "./target.js"
 
 let listOfProjects = [];
 
@@ -31,7 +27,7 @@ export function getProjListCopy() {
     return structuredClone(listOfProjects)
 }
 
-function getProjectNoCopy() {
+function getProjectNoCopy(target) {
     return listOfProjects.find(project => project.name === target);
 }
 
@@ -98,31 +94,26 @@ function valEmptyInputs(inputObj) {
     return true
 }
 
-function closeDialog(dialog) {
-    dialog.close()
-}
 
-export function addTodo() {
-    let targetProject = getProjectNoCopy()
+
+export function addTodo(state) {
+    let targetProject = getProjectNoCopy(state)
     const DOM = grabDOMElements("noedit")
-    if (!valEmptyInputs({ title: DOM.title.value, desc: DOM.desc.value, duedate: DOM.duedate.value, priority: DOM.priority.value, notes: DOM.notes.value })) { return }
+    if (!valEmptyInputs({ title: DOM.title.value, desc: DOM.desc.value, duedate: DOM.duedate.value, priority: DOM.priority.value, notes: DOM.notes.value })) { return false }
     targetProject.add(DOM.title.value, DOM.desc.value, DOM.duedate.value, DOM.priority.value, DOM.notes.value)
-    closeDialog(todoConstructDialog)
-    renderList();
+    return true
 }
 
-export function editTodo(index) {
-    let project = getProjectNoCopy();
+export function editTodo(index, state) {
+    let project = getProjectNoCopy(state);
     const DOM = grabDOMElements("edit")
-    if (!valEmptyInputs({ title: DOM.title.value, desc: DOM.desc.value, duedate: DOM.duedate.value, priority: DOM.priority.value, notes: DOM.notes.value })) { return }
-    closeDialog(editDialog)
+    if (!valEmptyInputs({ title: DOM.title.value, desc: DOM.desc.value, duedate: DOM.duedate.value, priority: DOM.priority.value, notes: DOM.notes.value })) { return false }
     project.edit(index, DOM.title.value, DOM.desc.value, DOM.duedate.value, DOM.priority.value, DOM.notes.value)
-    renderList()
+    return true
 }
 
-export function removeTodo(id) {
-    let targetProject = getProjectNoCopy()
+export function removeTodo(id, state) {
+    let targetProject = getProjectNoCopy(state)
     let targetTodoIndex = targetProject.list.findIndex((item) => { return item.id === id })
     targetProject.remove(targetTodoIndex)
-    renderList()
 }
