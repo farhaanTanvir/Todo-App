@@ -3,7 +3,6 @@ const todoListDOM = document.querySelector('.todos') // takes '.todo-item'
 const todoDialog = document.querySelector('#todo-dialog')
 const navContainer = document.querySelector('#project-cont')
 
-
 export function grabDOMElements(editOrNah) {
   if (editOrNah === "noedit") {
     const title = document.querySelector('#title').value
@@ -29,7 +28,6 @@ function formatDate(dateStr) {
 }
 
 export function renderList(findProjFunction) {
-  // console.log(findProjFunction)
   let projectObject = findProjFunction
   todoListDOM.innerHTML = ""
   projectObject.list.reverse()

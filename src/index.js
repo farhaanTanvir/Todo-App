@@ -1,7 +1,7 @@
 import "./style.css";
 import { makeProject, addTodo, removeTodo, editTodo, getProjListCopy, findProject, warnState } from "./projects.js"
 import { renderList, renderProjects, expandTodo, grabDOMElements } from "./dom.js"
-import { target } from "./target.js"
+import { target, changeTarget } from "./target.js"
 
 const todoDialog = document.querySelector('#todo-dialog')
 document.body.append(todoDialog)
@@ -18,14 +18,17 @@ const todoContainer = document.querySelector('.todos')
 const editDialog = document.querySelector('#editTodo')
 const saveEditBtn = document.getElementById("saveEdit");
 const cancelEditBtn = document.getElementById("cancelEdit");
+const navInbox = document.querySelector('#inbox-nav')
+const navContainer = document.querySelector('#project-cont')
+const Header = document.querySelector('h1')
 
 makeProject("Inbox")
-// console.log(findProject(target))
 renderList(findProject(target));
 renderProjects(getProjListCopy())
+Header.innerText = target
 
 
-// WHATS LEFT (optional, for when you'll ship this)
+// WHATS LEFT (optional, for when you'll ship this, if you ever)
 
 // something to mark a todo complete 
 // clear input boxes after every todo creation (LAST THING TO DO)
@@ -33,21 +36,21 @@ renderProjects(getProjListCopy())
 // when rendering DOM, something other than insertAdjacentHTML is necessary to use since it's taking user input. And this applies EVERYWHERE insertAdjacentHTML is used btw. Just use other inserting methods
 
 
-// SINGLE RESPONSIBILITY CHECK:
-// dom.js
-// listjs 
-// target.js
 
+navInbox.addEventListener('click', () => {
+    changeTarget("Inbox")
+    Header.innerText = target
+    renderList(findProject(target));
+})
 
-// finishing work:
-
-// dependency inversion check
-
-
-
-// ask chatbots if any of the methods here would have been better suited as a class's method (just for the sake of practising preserving classes. app works fine either way)
-
-// ask one last time for SOLID principle violations
+navContainer.addEventListener('click', (event) => {
+    event.stopPropagation();
+    if (event.target.classList.contains("inbox")) { return }
+    if (!event.target.classList.contains("proj")) { return }
+    changeTarget(event.target.dataset.name)
+    Header.innerText = target
+    renderList(findProject(target))
+})
 
 function issueWarning() {
     alert(warnState)
