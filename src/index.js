@@ -2,6 +2,7 @@ import "./style.css";
 import { makeProject, addTodo, removeTodo, editTodo, getProjListCopy, findProject, warnState } from "./projects.js"
 import { renderList, renderProjects, expandTodo, grabDOMElements } from "./dom.js"
 import { target, changeTarget } from "./target.js"
+import { saveToStorage, load } from "./storage.js"
 
 const todoDialog = document.querySelector('#todo-dialog')
 document.body.append(todoDialog)
@@ -22,12 +23,16 @@ const navInbox = document.querySelector('#inbox-nav')
 const navContainer = document.querySelector('#project-cont')
 const Header = document.querySelector('h1')
 
-makeProject("Inbox")
-renderList(findProject(target));
+if (!load(addTodo, makeProject, changeTarget)) { makeProject("Inbox") }
+// console.log(target)
+
+
+changeTarget("Inbox")
 renderProjects(getProjListCopy())
 Header.innerText = target
 
-
+// addTodo(target, { title: "nein", desc: "nein", duedate: "2026-10-29", priority: "medium", notes: "nein" })
+renderList(findProject(target));
 // WHATS LEFT (optional, for when you'll ship this, if you ever)
 
 // something to mark a todo complete 
@@ -65,6 +70,7 @@ let targetIndexForEdit = null
 saveEditBtn.addEventListener('click', () => {
     if (targetIndexForEdit === null) { return }
     if (editTodo(targetIndexForEdit, target, grabDOMElements("edit"))) { closeDialog(editDialog) } else { issueWarning() }
+    saveToStorage(getProjListCopy())
     renderList(findProject(target))
 })
 
@@ -97,6 +103,7 @@ addButton.addEventListener('click', () => {
 projectSubmit.addEventListener('click', (e) => {
     e.preventDefault()
     if (addTodo(target, grabDOMElements("noedit"))) { closeDialog(todoConstructDialog) } else { issueWarning() }
+    saveToStorage(getProjListCopy())
     renderList(findProject(target));
 })
 
@@ -133,6 +140,7 @@ function editListener() {
 
 function removeListener() {
     removeTodo(event.target.dataset.id, target)
+    saveToStorage(getProjListCopy())
     renderList(findProject(target))
 }
 

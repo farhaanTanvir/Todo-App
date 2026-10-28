@@ -85,9 +85,14 @@ function valEmptyInputs(inputObj) {
 }
 
 export function addTodo(state, DOMGrabber) {
+    //console.log(state)
+    //console.log(listOfProjects)
     let targetProject = getProjectNoCopy(state)
+    //console.log(targetProject)
     const DOM = DOMGrabber
     if (!valEmptyInputs({ title: DOM.title, desc: DOM.desc, duedate: DOM.duedate, priority: DOM.priority, notes: DOM.notes })) { return false }
+    //console.log(DOM)
+
     targetProject.add(DOM.title, DOM.desc, DOM.duedate, DOM.priority, DOM.notes)
     return true
 }
