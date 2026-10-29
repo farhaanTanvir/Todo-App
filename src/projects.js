@@ -56,10 +56,6 @@ function EmptyInputFields() {
     warnState = "You have not filled out every input required"
 }
 
-function PastDate() {
-    warnState = "Due date cannot be in the past!"
-}
-
 function duplicateName() {
     warnState = "You can't make two projects of the same name"
 }
