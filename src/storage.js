@@ -1,14 +1,20 @@
 export function saveToStorage(godArray) {
-    localStorage.setItem("projects", JSON.stringify(godArray))
-    //console.log("sent!")
-    //console.log(localStorage)
+    try {
+        localStorage.setItem("todoApp-projects", JSON.stringify(godArray))
+    } catch {
+        return
+    }
 }
 
 export function load(addTodoFunction, addProjectFunction, stateUpdater) {
     let inboxPresent = false
-    const saved = JSON.parse(localStorage.getItem("projects"))
+    let saved
+    try {
+        saved = JSON.parse(localStorage.getItem("todoApp-projects"))
+    } catch {
+        return
+    }
     if (!saved) { return }
-    // if (!saved.length) { return false }
     saved.forEach((project => {
         addProjectFunction(project.name)
         if (project.name === "Inbox") { inboxPresent = true }

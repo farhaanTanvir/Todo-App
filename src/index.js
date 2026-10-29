@@ -11,7 +11,6 @@ const addButton = document.querySelector('.add')
 const todoConstructDialog = document.querySelector('#todo-constructor')
 const projectSubmit = document.querySelector('#projectConstructorSubmit')
 const projectCancel = document.querySelector('#addPanelCancel')
-
 const addProjectButton = document.querySelector('#addProject')
 const projectDialog = document.querySelector('#projectNameCont')
 const submitToMakeProject = document.querySelector('#makeProjectSubmit')
@@ -24,22 +23,11 @@ const navContainer = document.querySelector('#project-cont')
 const Header = document.querySelector('h1')
 
 if (!load(addTodo, makeProject, changeTarget)) { makeProject("Inbox") }
-// console.log(target)
-
 
 changeTarget("Inbox")
 renderProjects(getProjListCopy())
 Header.innerText = target
-
-// addTodo(target, { title: "nein", desc: "nein", duedate: "2026-10-29", priority: "medium", notes: "nein" })
 renderList(findProject(target));
-// WHATS LEFT (optional, for when you'll ship this, if you ever)
-
-// something to mark a todo complete 
-// clear input boxes after every todo creation (LAST THING TO DO)
-// whitespace inputs taken in creating and editing todos, so need a regex to filter that out in validation
-// when rendering DOM, something other than insertAdjacentHTML is necessary to use since it's taking user input. And this applies EVERYWHERE insertAdjacentHTML is used btw. Just use other inserting methods
-
 
 
 navInbox.addEventListener('click', () => {
@@ -119,6 +107,7 @@ submitToMakeProject.addEventListener('click', (e) => {
     e.preventDefault()
     const title = document.querySelector('#projectTitle')
     if (makeProject(title.value)) { projectDialog.close() } else { issueWarning() }
+    saveToStorage(getProjListCopy())
     renderProjects(getProjListCopy())
 })
 

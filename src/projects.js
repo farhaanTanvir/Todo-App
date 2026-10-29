@@ -1,5 +1,4 @@
 import { listItem } from './list.js'
-import { parseISO, isPast } from "date-fns"
 
 let listOfProjects = [];
 
@@ -74,11 +73,6 @@ function valEmptyInputs(inputObj) {
         return false
     } else if (!inputObj.duedate) {
         EmptyInputFields()
-        return false
-    }
-
-    if (isPast(parseISO(inputObj.duedate))) {
-        PastDate()
         return false
     }
     return true
