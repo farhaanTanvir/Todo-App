@@ -1,183 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <nav>
-    <div class="id"><img src="./images/avatar-1577909_1280.png" alt="Empty Profile"><p>Farhan</p></div>
-    <div class="nav-item  inbox" id="inbox-nav">Inbox</div>
-    <div class="nav-item xtra-bottom today">Today</div>
-    <div class="pp xtra-bottom"><p>My Projects</p> <span id="addProject">+</span></div>
-    <div id="project-cont"> 
-    
-</div>
-<dialog id="projectNameCont">
-
-  <form method="dialog" class="todo-form">
-<div class="form-group">
-    <label for="title">What do you want to name your project? </label>
-    <input 
-      type="text" 
-      id="projectTitle" 
-      name="title" 
-      required 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Outfit:wght@600;700&display=swap"
+      rel="stylesheet"
     />
-  </div>
+  </head>
+  <body>
+    <nav>
+      <div class="id">
+        <img src="./images/avatar-1577909_1280.png" alt="Empty Profile" />
+        <p>Farhan</p>
+      </div>
+      <div class="nav-item inbox" id="inbox-nav">Inbox</div>
+      <div class="nav-item xtra-bottom today">Today</div>
+      <div class="pp xtra-bottom">
+        <p>My Projects</p>
+        <span id="addProject">+</span>
+      </div>
+      <div id="project-cont"></div>
+      <dialog id="projectNameCont">
+        <form method="dialog" class="todo-form">
+          <div class="form-group">
+            <label for="title">What do you want to name your project? </label>
+            <input type="text" id="projectTitle" name="title" required />
+          </div>
 
-  <!-- Submit Button -->
-  <div class="form-actions">
-    <button type="submit" class="add-btn" id="makeProjectSubmit">Add Task</button>
-  </div>
-    </form>
+          <!-- Submit Button -->
+          <div class="form-actions">
+            <button type="submit" class="add-btn" id="makeProjectSubmit">
+              Add Task
+            </button>
+          </div>
+        </form>
+      </dialog>
+    </nav>
 
-</dialog>
+    <div class="display">
+      <dialog id="editTodo">
+        <!-- Paste this inside <dialog id="editTodo"> ... </dialog> -->
+        <form method="dialog" id="editForm" class="todo-form edit-todo-form">
+          <h2 class="edit-heading">Edit Todo</h2>
 
-  </nav>
+          <!-- Title [text] -->
+          <div class="form-group">
+            <label for="editTitle">Title</label>
+            <input
+              type="text"
+              id="editTitle"
+              name="title"
+              pattern=".*\S.*"
+              required
+            />
+            <span class="error" id="titleError" aria-live="polite"></span>
+          </div>
 
-  <div class="display">
+          <!-- Description [textarea] -->
+          <div class="form-group">
+            <label for="editDescription">Description</label>
+            <textarea
+              id="editDescription"
+              name="description"
+              rows="3"
+              required
+            ></textarea>
+            <span class="error" id="descError" aria-live="polite"></span>
+          </div>
 
-    <dialog id="editTodo">
+          <!-- Row for Due Date & Priority -->
+          <div class="form-row">
+            <!-- Due Date [date input] -->
+            <div class="form-group">
+              <label for="editDueDate">Due Date</label>
+              <input type="date" id="editDueDate" name="dueDate" required />
+              <span class="error" id="dueDateError" aria-live="polite"></span>
+            </div>
 
-      <!-- Paste this inside <dialog id="editTodo"> ... </dialog> -->
-<form method="dialog" class="todo-form edit-todo-form">
-  <h2 class="edit-heading">Edit Todo</h2>
+            <!-- Priority [drop down: low, medium, high] -->
+            <div class="form-group">
+              <label for="editPriority">Priority</label>
+              <select id="editPriority" name="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+          </div>
 
-  <!-- Title [text] -->
-  <div class="form-group">
-    <label for="editTitle">Title</label>
-    <input
-      type="text"
-      id="editTitle"
-      name="title"
-    />
-  </div>
+          <!-- Notes [textarea] -->
+          <div class="form-group">
+            <label for="editNotes">Notes</label>
+            <textarea
+              id="editNotes"
+              name="notes"
+              rows="2"
+              required
+              placeholder="Additional notes or references..."
+            ></textarea>
+          </div>
 
-  <!-- Description [textarea] -->
-  <div class="form-group">
-    <label for="editDescription">Description</label>
-    <textarea
-      id="editDescription"
-      name="description"
-      rows="3"
-    ></textarea>
-  </div>
+          <!-- Save / Cancel -->
+          <div class="form-actions edit-actions">
+            <button type="button" class="save-btn" id="saveEdit">Save</button>
+            <button type="button" class="cancel-btn" id="cancelEdit">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </dialog>
 
-  <!-- Row for Due Date & Priority -->
-  <div class="form-row">
-    <!-- Due Date [date input] -->
-    <div class="form-group">
-      <label for="editDueDate">Due Date</label>
-      <input
-        type="date"
-        id="editDueDate"
-        name="dueDate"
-      />
-    </div>
+      <dialog id="todo-constructor">
+        <form method="dialog" class="todo-form">
+          <div class="form-group">
+            <label for="title">Title </label>
+            <input type="text" id="title" name="title" required />
+          </div>
 
-    <!-- Priority [drop down: low, medium, high] -->
-    <div class="form-group">
-      <label for="editPriority">Priority</label>
-      <select id="editPriority" name="priority">
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-      </select>
-    </div>
-  </div>
+          <!-- Description [text] -->
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="3"
+              required
+            ></textarea>
+          </div>
 
-  <!-- Notes [textarea] -->
-  <div class="form-group">
-    <label for="editNotes">Notes</label>
-    <textarea
-      id="editNotes"
-      name="notes"
-      rows="2"
-      placeholder="Additional notes or references..."
-    ></textarea>
-  </div>
+          <!-- Row for Due Date & Priority -->
+          <div class="form-row">
+            <!-- Due Date [date input] -->
+            <div class="form-group">
+              <label for="dueDate">Due Date</label>
+              <input type="date" id="dueDate" name="dueDate" required />
+            </div>
 
-  <!-- Save / Cancel -->
-  <div class="form-actions edit-actions">
-    <button type="button" class="save-btn" id="saveEdit">Save</button>
-    <button type="button" class="cancel-btn" id="cancelEdit">Cancel</button>
-  </div>
-</form>
+            <!-- Priority [drop down: low, medium, high] -->
+            <div class="form-group">
+              <label for="priority">Priority</label>
+              <select id="priority" name="priority" required>
+                <option value="low" selected>Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+          </div>
 
-    </dialog>
+          <!-- Notes [optional text] -->
+          <div class="form-group">
+            <label for="notes">Notes</label>
+            <textarea
+              id="notes"
+              name="notes"
+              rows="2"
+              placeholder="Additional notes or references..."
+            ></textarea>
+          </div>
 
-    <dialog id="todo-constructor"><form method="dialog" class="todo-form">
-<div class="form-group">
-    <label for="title">Title </label>
-    <input 
-      type="text" 
-      id="title" 
-      name="title" 
-      required 
-    />
-  </div>
+          <!-- Submit Button -->
+          <div class="form-actions">
+            <button class="add-btn" id="addPanelCancel">Cancel</button
+            ><button class="add-btn" id="projectConstructorSubmit">
+              Add Task
+            </button>
+          </div>
+        </form>
+      </dialog>
+      <div class="outcast">
+        <h1>Title</h1>
+        <button class="add">+ Add Project</button>
+      </div>
 
-  <!-- Description [text] -->
-  <div class="form-group">
-    <label for="description">Description</label>
-    <textarea 
-      id="description" 
-      name="description" 
-      rows="3" 
-      required
-    ></textarea>
-  </div>
-
-  <!-- Row for Due Date & Priority -->
-  <div class="form-row">
-    <!-- Due Date [date input] -->
-    <div class="form-group">
-      <label for="dueDate">Due Date</label>
-      <input 
-        type="date" 
-        id="dueDate" 
-        name="dueDate" 
-        required 
-      />
-    </div>
-
-    <!-- Priority [drop down: low, medium, high] -->
-    <div class="form-group">
-      <label for="priority">Priority</label>
-      <select id="priority" name="priority" required>
-        <option value="low" selected>Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-      </select>
-    </div>
-  </div>
-
-  <!-- Notes [optional text] -->
-  <div class="form-group">
-    <label for="notes">Notes</label>
-    <textarea 
-      id="notes" 
-      name="notes" 
-      rows="2" 
-      placeholder="Additional notes or references..."
-    ></textarea>
-  </div>
-
-  <!-- Submit Button -->
-  <div class="form-actions">
-    <button class="add-btn" id="addPanelCancel">Cancel</button><button class="add-btn" id="projectConstructorSubmit">Add Task</button>
-  </div>
-    </form></dialog>
-      <div class="outcast"><h1>Title</h1> <button class="add">+ Add Project</button></div> 
-
-    <div class="todos">
-      <dialog id="todo-dialog"></dialog>
-      <!-- <div class="todo-item">
+      <div class="todos">
+        <dialog id="todo-dialog"></dialog>
+        <!-- <div class="todo-item">
         <p class="title">Learn LocalStorage</p>
         <p class="due">21 Sep 2026</p>
         <p class="die">Coding</p>
@@ -186,8 +187,7 @@
         <p class="title">Learn Organic</p>
         <p class="due">21 Sep 2026</p>
       </div> -->
-
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

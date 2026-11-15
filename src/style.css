@@ -1,272 +1,265 @@
 body {
-    background-color: rgb(223, 201, 201);
-    display: grid;
-    grid-template-columns: 1fr 6fr;
-    margin: 0;
-    padding: 0;
+  background-color: rgb(223, 201, 201);
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 nav {
-    background-color: rgb(226, 212, 212);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding: 30px 20px 30px 30px;
-    font-size: 1.25rem;
-    letter-spacing: 1.6px;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 600;
-    width: 14vw;
+  background-color: rgb(226, 212, 212);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px 30px 30px;
+  font-size: 1.25rem;
+  letter-spacing: 1.6px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  width: 14vw;
 }
 
 .display {
-    height: 100vh;
-    font-family: 'Nunito', sans-serif;
-    padding-left: 250px;
-    padding-top: 60px;
-    font-size: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    padding-right: 400px;
+  height: 100vh;
+  font-family: "Nunito", sans-serif;
+  padding-left: 250px;
+  padding-top: 60px;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  padding-right: 400px;
 }
 
 .display h1 {
-    letter-spacing: 2px;
+  letter-spacing: 2px;
 }
 
 .nav-item {
-    background-color: rgba(255, 255, 255, 0);
-    width: 100%;
-    padding: 7px;
-    border-radius: 10px;
-
+  background-color: rgba(255, 255, 255, 0);
+  width: 100%;
+  padding: 7px;
+  border-radius: 10px;
 }
 
 .pp {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 10px;
-    width: 100%;
-    padding: 7px;
-    border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  width: 100%;
+  padding: 7px;
+  border-radius: 10px;
 }
 
 .pp p {
-
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 #addProject {
-    margin: 0;
-    padding-left: 7px;
-    padding-right: 6px;
-    border-radius: 10px;
-
+  margin: 0;
+  padding-left: 7px;
+  padding-right: 6px;
+  border-radius: 10px;
 }
 
 #addProject:hover {
-    background-color: rgba(0, 0, 0, 0.24);
-    cursor: pointer
+  background-color: rgba(0, 0, 0, 0.24);
+  cursor: pointer;
 }
 
 .xtra-bottom {
-    margin-bottom: 12px;
+  margin-bottom: 12px;
 }
 
 .nav-item:hover {
-    background-color: rgba(0, 0, 0, 0.164)
+  background-color: rgba(0, 0, 0, 0.164);
 }
 
 .id {
-    border-bottom: 1px solid black;
-    margin-bottom: 20px;
-    padding: -10px;
-    margin-top: -20px;
-    width: 119%;
-    margin-left: -20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+  padding: -10px;
+  margin-top: -20px;
+  width: 119%;
+  margin-left: -20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .id p {
-    margin-left: 25px;
-    font-size: 1.5rem;
-    font-weight: bold;
+  margin-left: 25px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 nav img {
-    height: 50px;
-    width: 50px;
-    margin: 0;
-    padding: 0;
-    margin-left: 20px;
+  height: 50px;
+  width: 50px;
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
 }
 
 .project-item {
-    font-weight: normal !important;
-    font-size: 1.1rem;
-    margin-left: 10px;
+  font-weight: normal !important;
+  font-size: 1.1rem;
+  margin-left: 10px;
 }
 
 .project-item::before {
-    content: "";
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    margin-right: 0.8rem;
-    vertical-align: middle;
-    background-image: url(./images/hashtag-svgrepo-com.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.8rem;
+  vertical-align: middle;
+  background-image: url(./images/hashtag-svgrepo-com.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .inbox::before {
-    content: "";
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    margin-right: 0.8rem;
-    vertical-align: middle;
-    background-image: url(./images/inbox-svgrepo-com.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.8rem;
+  vertical-align: middle;
+  background-image: url(./images/inbox-svgrepo-com.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .today::before {
-    content: "";
-    display: inline-block;
-    width: 1.4rem;
-    height: 1.4rem;
-    margin-right: 0.8rem;
-    vertical-align: middle;
-    background-image: url(./images/calendar-circle-exclamation-svgrepo-com.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+  content: "";
+  display: inline-block;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-right: 0.8rem;
+  vertical-align: middle;
+  background-image: url(./images/calendar-circle-exclamation-svgrepo-com.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .todos {
-    margin-top: -10px;
-
+  margin-top: -10px;
 }
 
 .todo-item {
-    border-bottom: 0.1px solid rgba(128, 128, 128, 0.377);
+  border-bottom: 0.1px solid rgba(128, 128, 128, 0.377);
 }
 
 .todos .title {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .todos .due {
-    font-size: 0.9rem;
-    color: rgb(53, 40, 17);
-    margin-top: -10px;
-
+  font-size: 0.9rem;
+  color: rgb(53, 40, 17);
+  margin-top: -10px;
 }
 
 .todo-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .buttons-cont button {
-    padding: 8px;
-    border: none;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    margin-right: 10px
+  padding: 8px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-right: 10px;
 }
 
 .buttons-cont button:hover {
-    background-color: rgba(187, 167, 167, 0.24);
-    cursor: pointer;
-    transition: 0.1s
+  background-color: rgba(187, 167, 167, 0.24);
+  cursor: pointer;
+  transition: 0.1s;
 }
 
 .outcast {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .add {
-    height: 45px;
-    font-size: 1.1rem;
-    border: none;
-    border-radius: 8px;
-    padding: 11px;
+  height: 45px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  padding: 11px;
 }
 
 .nav-item {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-
-
 .todo-form {
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 12px;
-    padding: 24px;
-    margin-top: 20px;
-    max-width: 550px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  padding: 30px;
+  margin-top: 20px;
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .form-row {
-    display: flex;
-    gap: 16px;
+  display: flex;
+  gap: 16px;
 }
 
 .form-row .form-group {
-    flex: 1;
+  flex: 1;
 }
 
 .todo-form label {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: rgb(53, 40, 17);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgb(53, 40, 17);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Bracketed indicators formatting */
 .format-badge {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: rgba(53, 40, 17, 0.6);
-    font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(53, 40, 17, 0.6);
+  font-family: inherit;
 }
 
 .format-badge.optional {
-    color: rgba(128, 128, 128, 0.8);
-    font-weight: 500;
+  color: rgba(128, 128, 128, 0.8);
+  font-weight: 500;
 }
 
 /* Form controls styling */
@@ -274,258 +267,283 @@ nav img {
 .todo-form input[type="date"],
 .todo-form select,
 .todo-form textarea {
-    width: 100%;
-    padding: 10px 12px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.95rem;
-    color: #2c2c2c;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-    outline: none;
-    box-sizing: border-box;
-    transition: all 0.2s ease;
+  width: 100%;
+  padding: 12px 10px;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.95rem;
+  color: #2c2c2c;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
 }
 
 .todo-form textarea {
-    resize: vertical;
-    min-height: 60px;
+  resize: vertical;
+  min-height: 60px;
 }
 
 /* Focus and hover effects matching hover style in your navbar */
 .todo-form input:hover,
 .todo-form select:hover,
 .todo-form textarea:hover {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .todo-form input:focus,
 .todo-form select:focus,
 .todo-form textarea:focus {
-    background-color: #ffffff;
-    border-color: rgba(0, 0, 0, 0.4);
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
 }
 
 .todo-form select {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* Submit button styling */
 .form-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
 }
 
 .add-btn {
-    height: 45px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: rgb(53, 40, 17);
-    background-color: rgb(226, 212, 212);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-    padding: 0 24px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+  height: 45px;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: rgb(53, 40, 17);
+  background-color: rgb(226, 212, 212);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
 }
 
 .add-btn:hover {
-    background-color: rgba(0, 0, 0, 0.164);
+  background-color: rgba(0, 0, 0, 0.164);
 }
 
 .add-btn:active {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 dialog {
-    background-color: rgba(0, 0, 0, 0) !important;
-    border: none;
+  background-color: rgba(0, 0, 0, 0) !important;
+  border: none;
 }
 
 /* Container styling for the expanded view inside the dialog */
 .expanded-todo {
-    font-family: 'Nunito', sans-serif;
-    color: rgb(53, 40, 17);
-    background-color: rgb(226, 212, 212);
-    /* Matches your nav background */
-    padding: 40px;
-    width: 550px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    margin: 50px;
-
+  font-family: "Nunito", sans-serif;
+  color: rgb(53, 40, 17);
+  background-color: rgb(226, 212, 212);
+  /* Matches your nav background */
+  padding: 40px;
+  width: 550px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
 }
 
 /* Header containing the title and close button */
 .expanded-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-    padding-bottom: 16px;
-    gap: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  padding-bottom: 16px;
+  gap: 16px;
 }
 
 .expanded-title {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    word-break: break-word;
-    /* Min-height in case the title is empty initially */
-    min-height: 32px;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  word-break: break-word;
+  /* Min-height in case the title is empty initially */
+  min-height: 32px;
 }
 
 /* Close Button */
 .close-dialog-btn {
-    background: transparent;
-    border: none;
-    color: rgb(53, 40, 17);
-    font-size: 2rem;
-    line-height: 1;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    /* Pulling it slightly up and right so it aligns nicely */
-    margin-top: -4px;
-    margin-right: -8px;
+  background: transparent;
+  border: none;
+  color: rgb(53, 40, 17);
+  font-size: 2rem;
+  line-height: 1;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  /* Pulling it slightly up and right so it aligns nicely */
+  margin-top: -4px;
+  margin-right: -8px;
 }
 
 .close-dialog-btn:hover {
-    background-color: rgba(0, 0, 0, 0.164);
-    /* Matches your existing hover state */
+  background-color: rgba(0, 0, 0, 0.164);
+  /* Matches your existing hover state */
 }
 
 /* Body layout */
 .expanded-body {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .detail-row {
-    display: flex;
-    gap: 16px;
+  display: flex;
+  gap: 16px;
 }
 
 .detail-row .detail-group {
-    flex: 1;
+  flex: 1;
 }
 
 .detail-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 /* Labels */
 .detail-label {
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: rgba(53, 40, 17, 0.7);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(53, 40, 17, 0.7);
 }
 
 /* Read-only Data Containers */
 .detail-value {
-    background-color: rgb(255, 255, 255);
-    /* Slightly transparent white */
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 1rem;
-    min-height: 24px;
-    /* Keeps layout stable when empty */
-    word-wrap: break-word;
-    white-space: pre-wrap;
-    /* Preserves line breaks for descriptions/notes */
+  background-color: rgb(255, 255, 255);
+  /* Slightly transparent white */
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  min-height: 24px;
+  /* Keeps layout stable when empty */
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  /* Preserves line breaks for descriptions/notes */
 }
 
 .detail-value.min-tall {
-    min-height: 60px;
-    /* Gives bigger boxes for text-heavy fields */
+  min-height: 60px;
+  /* Gives bigger boxes for text-heavy fields */
 }
-
 
 /* Add to the bottom of your existing stylesheet.
    The form reuses .todo-form, .form-group, .form-row and .form-actions,
    so only the heading and the two buttons need new rules. */
 
 .edit-heading {
-    margin: 0;
-    padding-bottom: 14px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: rgb(53, 40, 17);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  margin: 0;
+  padding-bottom: 14px;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: rgb(53, 40, 17);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .edit-actions {
-    gap: 12px;
+  gap: 12px;
 }
 
 .save-btn,
 .cancel-btn {
-    height: 45px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 8px;
-    padding: 0 24px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+  height: 45px;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 8px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
 }
 
 .save-btn {
-    background-color: rgb(76, 140, 84);
+  background-color: rgb(76, 140, 84);
 }
 
 .save-btn:hover {
-    background-color: rgb(60, 118, 68);
+  background-color: rgb(60, 118, 68);
 }
 
 .cancel-btn {
-    background-color: rgb(184, 70, 70);
+  background-color: rgb(184, 70, 70);
 }
 
 .cancel-btn:hover {
-    background-color: rgb(158, 55, 55);
+  background-color: rgb(158, 55, 55);
 }
 
 .save-btn:active,
 .cancel-btn:active {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
 
-
-
-
 #addPanelCancel {
-    margin-right: 100px
+  margin-right: 100px;
 }
 
 .low {
-    color: rgb(12, 102, 12);
+  color: rgb(12, 102, 12);
 }
 
 .medium {
-    color: rgb(26, 26, 143);
+  color: rgb(26, 26, 143);
 }
 
 .high {
-    color: rgb(143, 8, 8)
+  color: rgb(143, 8, 8);
+}
+
+input:invalid {
+  border-color: #990000;
+  background-color: #da3d3d;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+/* error message styles */
+.error {
+  width: 100%;
+  padding: 0;
+
+  font-size: 80%;
+  color: white;
+  background-color: #990000;
+  border-radius: 0 0 5px 5px;
+
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 0.3em;
 }

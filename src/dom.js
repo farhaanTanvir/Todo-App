@@ -1,63 +1,81 @@
-import { parseISO, format } from "date-fns"
-const todoListDOM = document.querySelector('.todos') // takes '.todo-item' 
-const todoDialog = document.querySelector('#todo-dialog')
-const navContainer = document.querySelector('#project-cont')
+import { parseISO, format } from "date-fns";
+const todoListDOM = document.querySelector(".todos"); // takes '.todo-item'
+const todoDialog = document.querySelector("#todo-dialog");
+const navContainer = document.querySelector("#project-cont");
 
 export function grabDOMElements(editOrNah) {
   if (editOrNah === "noedit") {
-    const title = document.querySelector('#title').value
-    const desc = document.querySelector('#description').value
-    const duedate = document.querySelector('#dueDate').value
-    const priority = document.querySelector('#priority').value
-    const notes = document.querySelector('#notes').value
-    return { title, desc, duedate, priority, notes }
+    const title = document.querySelector("#title").value;
+    const desc = document.querySelector("#description").value;
+    const duedate = document.querySelector("#dueDate").value;
+    const priority = document.querySelector("#priority").value;
+    const notes = document.querySelector("#notes").value;
+    return { title, desc, duedate, priority, notes };
   } else if (editOrNah === "edit") {
-    const title = document.getElementById("editTitle").value
-    const desc = document.getElementById("editDescription").value
-    const duedate = document.getElementById("editDueDate").value
-    const priority = document.getElementById("editPriority").value
-    const notes = document.getElementById("editNotes").value
-    return { title, desc, duedate, priority, notes }
+    const title = document.getElementById("editTitle").value;
+    const desc = document.getElementById("editDescription").value;
+    const duedate = document.getElementById("editDueDate").value;
+    const priority = document.getElementById("editPriority").value;
+    const notes = document.getElementById("editNotes").value;
+    return { title, desc, duedate, priority, notes };
+  }
+  else if (editOrNah === "editNodes") {
+    const title = document.getElementById("editTitle");
+    const desc = document.getElementById("editDescription");
+    const duedate = document.getElementById("editDueDate");
+    const priority = document.getElementById("editPriority");
+    const notes = document.getElementById("editNotes");
+    return { title, desc, duedate, priority, notes };
   }
 }
 
 function formatDate(dateStr) {
-  if (!dateStr) { return }
+  if (!dateStr) {
+    return;
+  }
   const date = parseISO(dateStr);
-  return format(date, 'MMMM d, yyyy');
+  return format(date, "MMMM d, yyyy");
 }
 
 export function renderList(findProjFunction) {
-  let projectObject = findProjFunction
-  todoListDOM.innerHTML = ""
-  projectObject.list.reverse()
+  let projectObject = findProjFunction;
+  todoListDOM.innerHTML = "";
+  projectObject.list.reverse();
   projectObject.list.forEach((item) => {
-    todoListDOM.insertAdjacentHTML("beforeend", `<div class="todo-item">
+    todoListDOM.insertAdjacentHTML(
+      "beforeend",
+      `<div class="todo-item">
       <div>
         <p class="title ${item.priority}">${item.title}</p>
         <p class="due">${formatDate(item.due)}</p>
         </div>
         <div class="buttons-cont"><button class="expand" data-id="${item.id}">Expand</button><button class="delete" data-id="${item.id}">Delete</button><button class="editInitiateBtn" data-id="${item.id}">Edit</button></div>
-      </div>`)
-  })
+      </div>`,
+    );
+  });
 }
 
 export function renderProjects(projListCopy) {
-  navContainer.innerHTML = ""
+  navContainer.innerHTML = "";
   projListCopy.reverse().forEach((item) => {
     if (item.name === "Inbox") {
-      return
+      return;
     } else {
-      navContainer.insertAdjacentHTML("beforeend", `<div class="nav-item project-item proj" data-name="${item.name}">${item.name}</div>`)
+      navContainer.insertAdjacentHTML(
+        "beforeend",
+        `<div class="nav-item project-item proj" data-name="${item.name}">${item.name}</div>`,
+      );
     }
-  })
+  });
 }
 
 export function expandTodo(targetUUID, findProjFunction) {
-  let targetProject = findProjFunction
-  let targetTodo = targetProject.list.find(todo => todo.id === targetUUID)
-  todoDialog.innerHTML = ""
-  todoDialog.insertAdjacentHTML('beforeend', `
+  let targetProject = findProjFunction;
+  let targetTodo = targetProject.list.find((todo) => todo.id === targetUUID);
+  todoDialog.innerHTML = "";
+  todoDialog.insertAdjacentHTML(
+    "beforeend",
+    `
 <div class="expanded-todo">
     <header class="expanded-header">
         <h2 class="expanded-title">${targetTodo.title}</h2>
@@ -88,5 +106,35 @@ export function expandTodo(targetUUID, findProjFunction) {
         </div>
     </div>
 </div>
-    `)
+    `,
+  );
+}
+
+
+export function valTitle (titleNode, errorElement) {
+
+if (titleNode.validity.valueMissing) {
+  
+  errorElement.textContent = "You must enter a title name"
+  errorElement.className = "error active"
+}  
+
+if (titleNode.validity.patternMismatch) {
+  errorElement.textContent = "Title must contain a letter or number"
+  errorElement.className = "error active"
+}
+}
+
+export function valDesc (descNode, errorElement) {
+  if (descNode.validity.valueMissing) {
+    errorElement.textContent = "You must enter a description"
+    errorElement.className = "error active"
+  }
+}
+
+export function valDate (dateNode, errorElement) {
+  if (dateNode.validity.valueMissing) {
+    errorElement.textContent = "You must enter a due date"
+    errorElement.className = "error active"
+  }
 }
