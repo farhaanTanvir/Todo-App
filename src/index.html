@@ -118,7 +118,14 @@
         <form method="dialog" class="todo-form">
           <div class="form-group">
             <label for="title">Title </label>
-            <input type="text" id="title" name="title" required />
+            <input
+              type="text"
+              id="title"
+              name="title"
+              required
+              pattern=".*\S.*"
+            />
+            <span class="error" id="addTitleError" aria-live="polite"></span>
           </div>
 
           <!-- Description [text] -->
@@ -130,6 +137,7 @@
               rows="3"
               required
             ></textarea>
+            <span class="error" id="addDescError" aria-live="polite"></span>
           </div>
 
           <!-- Row for Due Date & Priority -->
@@ -138,12 +146,13 @@
             <div class="form-group">
               <label for="dueDate">Due Date</label>
               <input type="date" id="dueDate" name="dueDate" required />
+              <span class="error" id="addDateError" aria-live="polite"></span>
             </div>
 
             <!-- Priority [drop down: low, medium, high] -->
             <div class="form-group">
               <label for="priority">Priority</label>
-              <select id="priority" name="priority" required>
+              <select id="priority" name="priority">
                 <option value="low" selected>Low</option>
                 <option value="medium">Medium</option>
                 <option value="high">High</option>

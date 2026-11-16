@@ -38,9 +38,6 @@ const navInbox = document.querySelector("#inbox-nav");
 const navContainer = document.querySelector("#project-cont");
 const Header = document.querySelector("h1");
 
-
-
-
 if (!load(addTodo, makeProject, changeTarget)) {
   makeProject("Inbox");
 }
@@ -79,9 +76,6 @@ function closeDialog(dialog) {
 
 let targetIndexForEdit = null;
 
-
-
-
 function indexFinder(id) {
   let targetProject = findProject(target);
   return targetProject.list.findIndex((target) => {
@@ -111,20 +105,6 @@ function editDialogOpener(indexOfTarget, project) {
   );
 }
 
-addButton.addEventListener("click", () => {
-  todoConstructDialog.showModal();
-});
-
-projectSubmit.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (addTodo(target, grabDOMElements("noedit"))) {
-    closeDialog(todoConstructDialog);
-  } else {
-    issueWarning();
-  }
-  saveToStorage(getProjListCopy());
-  renderList(findProject(target));
-});
 
 projectCancel.addEventListener("click", () => {
   todoConstructDialog.close();
@@ -181,85 +161,164 @@ todoContainer.addEventListener("click", (event) => {
   }
 });
 
-const titleErrorDialogue = document.querySelector('#titleError');
-const descErrorDialogue = document.querySelector('#descError');
-const dateErrorDialogue = document.querySelector('#dueDateError');
+const titleErrorDialogue = document.querySelector("#titleError");
+const descErrorDialogue = document.querySelector("#descError");
+const dateErrorDialogue = document.querySelector("#dueDateError");
 
-const editForm = document.querySelector('#editForm');
+const editForm = document.querySelector("#editForm");
 const editElements = grabDOMElements("editNodes");
 
+editElements.title.addEventListener("input", () => {
+  if (editElements.title.validity.valid) {
+    titleErrorDialogue.textContent = "";
+    titleErrorDialogue.className = "error";
+  } else {
+    valTitle(editElements.title, titleErrorDialogue);
+  }
+});
 
-editElements.title.addEventListener('input', () => {
-if (editElements.title.validity.valid) {
-titleErrorDialogue.textContent = ""
-titleErrorDialogue.className = "error"
-} else {
-  valTitle(editElements.title, titleErrorDialogue)
-}
-})
-
-editElements.desc.addEventListener('input', () => {
+editElements.desc.addEventListener("input", () => {
   if (editElements.desc.validity.valid) {
-    descErrorDialogue.textContent = ""
-    descErrorDialogue.className = "error"
+    descErrorDialogue.textContent = "";
+    descErrorDialogue.className = "error";
   } else {
-    valDesc(editElements.desc, descErrorDialogue)
+    valDesc(editElements.desc, descErrorDialogue);
   }
-})
+});
 
-editElements.duedate.addEventListener('input', () => {
+editElements.duedate.addEventListener("input", () => {
   if (editElements.duedate.validity.valid) {
-    dateErrorDialogue.textContent = ""
-    dateErrorDialogue.className = "error"
+    dateErrorDialogue.textContent = "";
+    dateErrorDialogue.className = "error";
   } else {
-    valDate(editElements.duedate, dateErrorDialogue)
+    valDate(editElements.duedate, dateErrorDialogue);
   }
-})
+});
 
 saveEditBtn.addEventListener("click", () => {
   if (targetIndexForEdit === null) {
     return;
   }
   if (editElements.title.validity.valid) {
-  titleErrorDialogue.textContent = ""
-  titleErrorDialogue.className = "error"
- } else if (!editElements.title.validity.valid) {
-  valTitle(editForm.title, titleErrorDialogue)
-  return
- }
- 
- if (editElements.desc.validity.valid) {
-    descErrorDialogue.textContent = ""
-    descErrorDialogue.className = "error"
+    titleErrorDialogue.textContent = "";
+    titleErrorDialogue.className = "error";
+  } else if (!editElements.title.validity.valid) {
+    valTitle(editForm.title, titleErrorDialogue);
+    return;
+  }
+
+  if (editElements.desc.validity.valid) {
+    descErrorDialogue.textContent = "";
+    descErrorDialogue.className = "error";
   } else if (!editElements.desc.validity.valid) {
-    valDesc(editElements.desc, descErrorDialogue)
-    return
+    valDesc(editElements.desc, descErrorDialogue);
+    return;
   }
 
   if (editElements.duedate.validity.valid) {
-    dateErrorDialogue.textContent = ""
-    dateErrorDialogue.className = "error"
+    dateErrorDialogue.textContent = "";
+    dateErrorDialogue.className = "error";
   } else if (!editElements.duedate.validity.valid) {
-    valDate(editElements.duedate, dateErrorDialogue)
-    return
+    valDate(editElements.duedate, dateErrorDialogue);
+    return;
   }
 
   if (editTodo(targetIndexForEdit, target, grabDOMElements("edit"))) {
     closeDialog(editDialog);
-  } 
+  }
   saveToStorage(getProjListCopy());
   renderList(findProject(target));
 });
 
 cancelEditBtn.addEventListener("click", () => {
   editDialog.close();
-  titleErrorDialogue.textContent = ""
-  titleErrorDialogue.className = "error"
-  descErrorDialogue.textContent = ""
-  descErrorDialogue.className = "error"
-  dateErrorDialogue.textContent = ""
-  dateErrorDialogue.className = "error"
+  titleErrorDialogue.textContent = "";
+  titleErrorDialogue.className = "error";
+  descErrorDialogue.textContent = "";
+  descErrorDialogue.className = "error";
+  dateErrorDialogue.textContent = "";
+  dateErrorDialogue.className = "error";
 });
+
+const addTitleErrorBox = document.querySelector('#addTitleError')
+const addDescErrorBox = document.querySelector('#addDescError')
+const addDateErrorBox = document.querySelector('#addDateError')
+
+const addElements = grabDOMElements("noEditNodes")
+
+
+addElements.title.addEventListener("input", () => {
+  if (addElements.title.validity.valid) {
+    addTitleErrorBox.textContent = "";
+    addTitleErrorBox.className = "error";
+  } else {
+    valTitle(addElements.title, addTitleErrorBox);
+  }
+});
+
+addElements.desc.addEventListener("input", () => {
+  if (addElements.desc.validity.valid) {
+    addDescErrorBox.textContent = "";
+    addDescErrorBox.className = "error";
+  } else {
+    valDesc(addElements.desc, addDescErrorBox);
+  }
+});
+
+addElements.duedate.addEventListener("input", () => {
+  if (addElements.duedate.validity.valid) {
+    addDateErrorBox.textContent = "";
+    addDateErrorBox.className = "error";
+  } else {
+    valDate(addElements.duedate, addDateErrorBox);
+  }
+});
+
+projectSubmit.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  if (addElements.title.validity.valid) {
+    addTitleErrorBox.textContent = "";
+    addTitleErrorBox.className = "error";
+  } else if (!addElements.title.validity.valid) {
+    valTitle(addElements.title, addTitleErrorBox);
+    return;
+  }
+
+  if (addElements.desc.validity.valid) {
+    addDescErrorBox.textContent = "";
+    addDescErrorBox.className = "error";
+  } else if (!addElements.desc.validity.valid) {
+    valDesc(addElements.desc, addDescErrorBox);
+    return;
+  }
+
+  if (addElements.duedate.validity.valid) {
+    addDateErrorBox.textContent = "";
+    addDateErrorBox.className = "error";
+  } else if (!addElements.duedate.validity.valid) {
+    valDate(addElements.duedate, addDateErrorBox);
+    return;
+  }
+
+  if (addTodo(target, grabDOMElements("noedit"))) {
+    closeDialog(todoConstructDialog);
+  }
+  saveToStorage(getProjListCopy());
+  renderList(findProject(target));
+});
+
+addButton.addEventListener("click", () => {
+    addTitleErrorBox.textContent = "";
+    addTitleErrorBox.className = "error";
+    addDescErrorBox.textContent = "";
+    addDescErrorBox.className = "error";
+    addDateErrorBox.textContent = "";
+    addDateErrorBox.className = "error";
+  todoConstructDialog.showModal();
+});
+
+// COULD turn these repated DOM calls into function and tuck them into dom.js, but I'm too lazy rn, maybe if I come back to it I'll do it then
 
 // WHATS LEFT (optional, for when you'll ship this, if you ever)
 

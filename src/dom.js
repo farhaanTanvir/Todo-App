@@ -18,13 +18,19 @@ export function grabDOMElements(editOrNah) {
     const priority = document.getElementById("editPriority").value;
     const notes = document.getElementById("editNotes").value;
     return { title, desc, duedate, priority, notes };
-  }
-  else if (editOrNah === "editNodes") {
+  } else if (editOrNah === "editNodes") {
     const title = document.getElementById("editTitle");
     const desc = document.getElementById("editDescription");
     const duedate = document.getElementById("editDueDate");
     const priority = document.getElementById("editPriority");
     const notes = document.getElementById("editNotes");
+    return { title, desc, duedate, priority, notes };
+  } else if (editOrNah === "noEditNodes") {
+    const title = document.querySelector("#title");
+    const desc = document.querySelector("#description");
+    const duedate = document.querySelector("#dueDate");
+    const priority = document.querySelector("#priority");
+    const notes = document.querySelector("#notes");
     return { title, desc, duedate, priority, notes };
   }
 }
@@ -110,31 +116,28 @@ export function expandTodo(targetUUID, findProjFunction) {
   );
 }
 
+export function valTitle(titleNode, errorElement) {
+  if (titleNode.validity.valueMissing) {
+    errorElement.textContent = "You must enter a title name";
+    errorElement.className = "error active";
+  }
 
-export function valTitle (titleNode, errorElement) {
-
-if (titleNode.validity.valueMissing) {
-  
-  errorElement.textContent = "You must enter a title name"
-  errorElement.className = "error active"
-}  
-
-if (titleNode.validity.patternMismatch) {
-  errorElement.textContent = "Title must contain a letter or number"
-  errorElement.className = "error active"
-}
-}
-
-export function valDesc (descNode, errorElement) {
-  if (descNode.validity.valueMissing) {
-    errorElement.textContent = "You must enter a description"
-    errorElement.className = "error active"
+  if (titleNode.validity.patternMismatch) {
+    errorElement.textContent = "Title must contain a letter or number";
+    errorElement.className = "error active";
   }
 }
 
-export function valDate (dateNode, errorElement) {
+export function valDesc(descNode, errorElement) {
+  if (descNode.validity.valueMissing) {
+    errorElement.textContent = "You must enter a description";
+    errorElement.className = "error active";
+  }
+}
+
+export function valDate(dateNode, errorElement) {
   if (dateNode.validity.valueMissing) {
-    errorElement.textContent = "You must enter a due date"
-    errorElement.className = "error active"
+    errorElement.textContent = "You must enter a due date";
+    errorElement.className = "error active";
   }
 }
